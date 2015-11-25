@@ -87,6 +87,7 @@ const struct spi_flash_params spi_flash_params_table[] = {
 	{"N25Q256",	   0x20ba19, 0x0,       64 * 1024,   512, RD_FULL,	   WR_QPP | SECT_4K},
 	{"N25Q256A",	   0x20bb19, 0x0,       64 * 1024,   512, RD_FULL,	   WR_QPP | SECT_4K},
 	{"N25Q512",	   0x20ba20, 0x0,       64 * 1024,  1024, RD_FULL, WR_QPP | E_FSR | SECT_4K},
+	{"MT25QL02GC",	   0x20ba22, 0x0,       64 * 1024,  4096, RD_FULL, WR_QPP | E_FSR | SECT_4K},
 #ifdef CONFIG_ARCH_ZYNQMP
 	{"N25Q512A",	   0x20bb20, 0x0,       64 * 1024,  1024, RD_FULL,	     WR_QPP | E_FSR},
 #else
@@ -134,6 +135,7 @@ const struct spi_flash_params spi_flash_params_table[] = {
 	{"IS25LP064",	   0x9d6017, 0x0,	64 * 1024,   128, RD_EXTN | QUAD_IO_FAST,     WR_QPP},
 	{"IS25LP128",	   0x9d6018, 0x0,	64 * 1024,   256, RD_EXTN | QUAD_IO_FAST,     WR_QPP},
 #endif
+
 	{},	/* Empty entry to terminate the list */
 	/*
 	 * Note:

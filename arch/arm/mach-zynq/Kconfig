@@ -42,6 +42,10 @@ config TARGET_ZYNQ_ZYBO
 	bool "Zynq Zybo Board"
 	select ZYNQ_CUSTOM_INIT
 
+config TARGET_ZYNQ_YPACKET2
+	bool "Zynq YPacket2 Board"
+	select ZYNQ_CUSTOM_INIT
+
 config TARGET_ZYNQ_AFX
 	bool "Zynq AFX Board"
 	select ZYNQ_CUSTOM_INIT
@@ -73,6 +77,7 @@ config SYS_CONFIG_NAME
 			        || TARGET_ZYNQ_ZC70X
 	default "zynq_zc770" if TARGET_ZYNQ_ZC770
 	default "zynq_zybo" if TARGET_ZYNQ_ZYBO
+	default "zynq_ypacket2" if TARGET_ZYNQ_YPACKET2
 	default "zynq_cse" if TARGET_ZYNQ_CSE
 	default "zynq_afx" if TARGET_ZYNQ_AFX
 	default "zynq_cc108" if TARGET_ZYNQ_CC108

@@ -42,6 +42,7 @@ dtb-$(CONFIG_ARCH_ZYNQ) += zynq-zc702.dtb \
 	zynq-zc706.dtb \
 	zynq-zed.dtb \
 	zynq-zybo.dtb \
+	zynq-ypacket2.dtb \
 	zynq-microzed.dtb \
 	zynq-cc108.dtb \
 	zynq-afx-nand.dtb \
