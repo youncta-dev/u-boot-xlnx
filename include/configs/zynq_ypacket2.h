@@ -24,6 +24,7 @@
 #define CONFIG_ZYNQ_EEPROM
 #define CONFIG_ZYNQ_BOOT_FREEBSD
 
+#define CONFIG_CMD_APS
 
 /* Define YPACKET2 PS Clock Frequency to 50MHz */
 #define CONFIG_ZYNQ_PS_CLK_FREQ	50000000UL

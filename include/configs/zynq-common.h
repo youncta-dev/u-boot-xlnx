@@ -189,7 +189,7 @@
 # define CONFIG_SPI_FLASH_WINBOND
 # define CONFIG_SPI_FLASH_ISSI
 # define CONFIG_SPI_FLASH_MACRONIX
-# define CONFIG_SF_DUAL_FLASH
+
 #endif
 
 /* NAND */
@@ -299,6 +299,14 @@
 		"echo Copying ramdisk... && " \
 		"sf read ${ramdisk_load_address} 0x620000 ${ramdisk_size} && " \
 		"bootm ${kernel_load_address} ${ramdisk_load_address} ${devicetree_load_address}\0" \
+    "aps_ram_load_address=0x2000000\0" \
+    "aps_size=0x6000000\0" \
+    "aps0_qspi_address=0x1000000\0" \
+    "aps1_qspi_address=0x7000000\0" \
+	"qspibootaps=echo Copying APS0 from QSPI flash to RAM... && " \
+		"sf probe 0 && " \
+		"sf read ${aps_ram_load_address} ${aps0_qspi_address} ${aps_size} && aps ${aps_ram_load_address} && " \
+        "bootm ${aps_kernel_load_addr} ${aps_ramdisk_load_addr} ${aps_dtb_load_addr}; fi\0" \
 	"uenvboot=" \
 		"if run loadbootenv; then " \
 			"echo Loaded environment from ${bootenv}; " \

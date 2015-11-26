@@ -148,6 +148,75 @@ static int do_mem_md(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 	return (rc);
 }
 
+static int do_mem_rmem(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
+{
+	ulong	addr, length;
+#if defined(CONFIG_HAS_DATAFLASH)
+	ulong	nbytes, linebytes;
+#endif
+	int	size;
+	int rc = 0;
+
+	/* We use the last specified parameters, unless new ones are
+	 * entered.
+	 */
+	addr = dp_last_addr;
+	size = dp_last_size;
+	length = 1;
+
+	if (argc < 3)
+		return CMD_RET_USAGE;
+
+	/* New command specified.  Check for a size specification.
+     * Defaults to long if no or incorrect specification.
+    */
+	if ((size = cmd_get_data_size(argv[0], 4)) < 0)
+		return 1;
+
+	/* Address is specified since argc > 1
+	 */
+	addr = simple_strtoul(argv[1], NULL, 16);
+
+
+	{
+#ifdef CONFIG_SYS_SUPPORT_64BIT_DATA
+	    uint64_t x;
+#else
+	    uint32_t x;
+#endif
+        char out[16] = { 0 };
+		ulong bytes = size * length;
+        ulong width = size;
+		const void *data = map_sysmem(addr, bytes);
+
+
+	    if (width == 4)
+		    x = *(volatile uint32_t *)data;
+#ifdef CONFIG_SYS_SUPPORT_64BIT_DATA
+		else if (width == 8)
+			x = *(volatile uint64_t *)data;
+#endif
+		else if (width == 2)
+			x = *(volatile uint16_t *)data;
+		else
+			x = *(volatile uint8_t *)data;
+#ifdef CONFIG_SYS_SUPPORT_64BIT_DATA
+		sprintf(out, "%0*" PRIx64, width * 2, x);
+#else
+		sprintf(out, "%0*x", width * 2, x);
+#endif
+        setenv(argv[2], out);
+
+		unmap_sysmem(data);
+	}
+
+
+	dp_last_addr = addr;
+	dp_last_length = length;
+	dp_last_size = size;
+	return (rc);
+}
+
 static int do_mem_mm(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
 	return mod_mem (cmdtp, 1, flag, argc, argv);
@@ -1239,6 +1308,16 @@ static int do_mem_crc(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 #endif
 
 /**************************************************/
+U_BOOT_CMD(
+	rmem,	3,	1,	do_mem_rmem,
+	"memory display bare",
+#ifdef CONFIG_SYS_SUPPORT_64BIT_DATA
+	"[.b, .w, .l, .q] address [# of objects]"
+#else
+	"[.b, .w, .l] address [# of objects]"
+#endif
+);
+
 U_BOOT_CMD(
 	md,	3,	1,	do_mem_md,
 	"memory display",
