@@ -11,7 +11,7 @@
 
 / {
 	model = "Zynq YPacket2 Development Board";
-	compatible = "zynq-ypacket2", "xlnx,zynq-7000";
+	compatible = "xlnx,zynq-zc706", "xlnx,zynq-7000";
 
 	aliases {
 		serial0 = &uart0;
@@ -77,6 +77,8 @@
 	#size-cells = <0>;
 	num-cs = <2>;
 	is-decoded-cs = <0>;
+	spi-max-frequency = <166666700>;
+
 	spidev@0{
 		compatible="spidev";
 		reg =<0>; //chipselect 0
