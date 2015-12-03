@@ -8,10 +8,12 @@
 obj-y	:= board.o
 
 # Copied from Xilinx SDK 2014.4
-hw-platform-$(CONFIG_TARGET_ZYNQ_ZED)		:= zed_hw_platform
-hw-platform-$(CONFIG_TARGET_ZYNQ_MICROZED)	:= MicroZed_hw_platform
-hw-platform-$(CONFIG_TARGET_ZYNQ_ZC702)		:= ZC702_hw_platform
-hw-platform-$(CONFIG_TARGET_ZYNQ_ZC706)		:= ZC706_hw_platform
+hw-platform-$(CONFIG_TARGET_ZYNQ_ZED)		        := zed_hw_platform
+hw-platform-$(CONFIG_TARGET_ZYNQ_MICROZED)	        := MicroZed_hw_platform
+hw-platform-$(CONFIG_TARGET_ZYNQ_ZC702)		        := ZC702_hw_platform
+hw-platform-$(CONFIG_TARGET_ZYNQ_ZC706)		        := ZC706_hw_platform
+
+
 # If you want to use customized ps7_init_gpl.c/h,
 # enable CONFIG_ZYNQ_CUSTOM_INIT and put them into custom_hw_platform/.
 # This line must be placed at the bottom of the list because
@@ -46,3 +48,12 @@ $(warning "make zynq_zc70x_defconfig" is also deprecated.)
 $(warning Use "make zynq_zc702_defconfig" or "make zynq_zc706_defconfig".)
 endif
 endif
+
+ifeq ($(CONFIG_TARGET_ZYNQ_YPACKET2),y)
+obj-y += ypacket2/si5347-spi.o ypacket2/si5347_config.o
+endif
+
+
+
+
+
