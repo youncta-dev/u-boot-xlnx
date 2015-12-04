@@ -15,6 +15,11 @@
 
 DECLARE_GLOBAL_DATA_PTR;
 
+
+#ifdef CONFIG_TARGET_ZYNQ_YPACKET2
+int si5347_configure(void);
+#endif
+
 #if (defined(CONFIG_FPGA) && !defined(CONFIG_SPL_BUILD)) || \
     (defined(CONFIG_SPL_FPGA_SUPPORT) && defined(CONFIG_SPL_BUILD))
 static xilinx_desc fpga;
@@ -79,6 +84,11 @@ int board_init(void)
 
 int board_late_init(void)
 {
+
+    #ifdef CONFIG_TARGET_ZYNQ_YPACKET2
+    si5347_configure();
+    #endif
+
 	switch ((zynq_slcr_get_boot_mode()) & ZYNQ_BM_MASK) {
 	case ZYNQ_BM_QSPI:
 		setenv("modeboot", "qspiboot");

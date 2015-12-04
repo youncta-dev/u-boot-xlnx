@@ -9,7 +9,7 @@ typedef u_short u16;
 
 #define PAGE_SET_REG        0x01 
 
-int si5347_configure();
+int si5347_configure(void);
 
 
 
