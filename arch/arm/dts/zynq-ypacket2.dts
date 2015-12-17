@@ -18,6 +18,7 @@
 		spi5 = &qspi;
         spi0 = &spi0;
         spi1 = &spi1;
+		ethernet0 = &gem1;
 	};
 
 	memory {
@@ -107,11 +108,49 @@
 	};
 };
 
+&pinctrl0 {
+	pinctrl_uart0_default: uart0-default {
+		mux {
+			groups = "uart0_0_grp";
+			function = "uart0";
+		};
 
+		conf {
+			groups = "uart0_0_grp";
+			slew-rate = <0>;
+			io-standard = <1>;
+		};
 
+		conf-rx {
+			pins = "MIO22";
+			bias-high-impedance;
+		};
+
+		conf-tx {
+			pins = "MIO23";
+			bias-disable;
+		};
+	};
+};
 
 &uart0 {
 	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart0_default>;
+};
+
+&gem1 {
+	status = "okay";
+    phy-mode = "sgmii";
+
+    phy-handle = <&phy1>;
+
+    phy1: phy@16 {
+                compatible = "Xilinx PCS/PMA PHY";
+                device_type = "ethernet-phy";
+                reg = <16>;
+    };
+
 };
 
 

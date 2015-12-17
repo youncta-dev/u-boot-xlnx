@@ -207,6 +207,9 @@ static u32 phy_setup_op(struct eth_device *dev, u32 phy_addr, u32 regnum,
 		(phy_addr << ZYNQ_GEM_PHYMNTNC_PHYAD_SHIFT_MASK) |
 		(regnum << ZYNQ_GEM_PHYMNTNC_PHREG_SHIFT_MASK) | *data;
 
+
+	debug("%s: phy_addr %d, regnum 0x%x, mgtcr %08x, reg_phymntnc %08x\n", __func__, phy_addr, regnum, mgtcr, &regs->phymntnc);
+
 	/* Write mgtcr and wait for completion */
 	writel(mgtcr, &regs->phymntnc);
 
@@ -285,6 +288,7 @@ static int zynq_gem_setup_mac(struct eth_device *dev)
 	u32 i, macaddrlow, macaddrhigh;
 	struct zynq_gem_regs *regs = (struct zynq_gem_regs *)dev->iobase;
 
+
 	/* Set the MAC bits [31:0] in BOT */
 	macaddrlow = dev->enetaddr[0];
 	macaddrlow |= dev->enetaddr[1] << 8;
@@ -323,6 +327,8 @@ static int zynq_gem_init(struct eth_device *dev, bd_t * bis)
 			SUPPORTED_100baseT_Full |
 			SUPPORTED_1000baseT_Half |
 			SUPPORTED_1000baseT_Full;
+
+    printf("%s\n", __func__);
 
 	if (!priv->init) {
 		/* Disable all interrupts */
@@ -423,7 +429,7 @@ static int zynq_gem_init(struct eth_device *dev, bd_t * bis)
 	}
 
 	/* Change the rclk and clk only not using EMIO interface */
-	if (!priv->emio)
+	if (!priv->emio) 
 		zynq_slcr_gem_clk_setup(dev->iobase !=
 					ZYNQ_GEM_BASEADDR0, clk_rate);
 
@@ -656,7 +662,7 @@ int zynq_gem_of_init(const void *blob)
 	u32 ret = 0;
 	u32 reg, phy_reg;
 
-	debug("ZYNQ GEM: Initialization\n");
+	printf("ZYNQ GEM: Initialization\n");
 
 	do {
 		offset = fdt_node_offset_by_compatible(blob, offset,

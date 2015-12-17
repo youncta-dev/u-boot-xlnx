@@ -44,7 +44,6 @@ config TARGET_ZYNQ_ZYBO
 
 config TARGET_ZYNQ_YPACKET2
 	bool "Zynq YPacket2 Board"
-	select ZYNQ_CUSTOM_INIT
 
 config TARGET_ZYNQ_AFX
 	bool "Zynq AFX Board"

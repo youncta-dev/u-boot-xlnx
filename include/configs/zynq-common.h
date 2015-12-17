@@ -12,7 +12,7 @@
 
 /* CPU clock */
 #ifndef CONFIG_CPU_FREQ_HZ
-# define CONFIG_CPU_FREQ_HZ	800000000
+# define CONFIG_CPU_FREQ_HZ	666666667
 #endif
 
 /* Cache options */
@@ -34,7 +34,7 @@
 #define CONFIG_BAUDRATE		115200
 /* The following table includes the supported baudrates */
 #define CONFIG_SYS_BAUDRATE_TABLE  \
-	{300, 600, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400}
+	{300, 600, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600 }
 
 #define CONFIG_ZYNQ_GPIO
 #define CONFIG_CMD_GPIO
@@ -292,7 +292,7 @@
 		"echo Copying ramdisk... && " \
 		"cp.b 0xE2620000 ${ramdisk_load_address} ${ramdisk_size} && " \
 		"bootm ${kernel_load_address} ${ramdisk_load_address} ${devicetree_load_address}\0" \
-	"qspiboot=echo Copying Linux from QSPI flash to RAM... && " \
+	"qspiboot1=echo Copying Linux from QSPI flash to RAM... && " \
 		"sf probe 0 0 0 && " \
 		"sf read ${kernel_load_address} 0x100000 ${kernel_size} && " \
 		"sf read ${devicetree_load_address} 0x600000 ${devicetree_size} && " \
@@ -300,10 +300,10 @@
 		"sf read ${ramdisk_load_address} 0x620000 ${ramdisk_size} && " \
 		"bootm ${kernel_load_address} ${ramdisk_load_address} ${devicetree_load_address}\0" \
     "aps_ram_load_address=0x2000000\0" \
-    "aps_size=0x6000000\0" \
+    "aps_size=0x2000000\0" \
     "aps0_qspi_address=0x1000000\0" \
     "aps1_qspi_address=0x7000000\0" \
-	"qspibootaps=echo Copying APS0 from QSPI flash to RAM... && " \
+	"qspiboot=echo Copying APS0 from QSPI flash to RAM... && " \
 		"sf probe 5:0 && " \
 		"sf read ${aps_ram_load_address} ${aps0_qspi_address} ${aps_size} && aps ${aps_ram_load_address} && " \
         "bootm ${aps_kernel_load_addr} ${aps_ramdisk_load_addr} ${aps_dtb_load_addr}\0" \

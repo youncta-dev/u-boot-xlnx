@@ -52,14 +52,17 @@ static int do_aps(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 		x = *(data + 4);
 		sprintf(out, "%0*x", 8, x + addr);
         setenv("aps_kernel_load_addr", out);
+        printf("aps_kernel_load_addr %s\n", out);
 
 		x = *(data + 6);
 		sprintf(out, "%0*x", 8, x + addr);
         setenv("aps_dtb_load_addr", out);
+        printf("aps_dtb_load_addr %s\n", out);
 
 		x = *(data + 8);
 		sprintf(out, "%0*x", 8, x + addr);
         setenv("aps_ramdisk_load_addr", out);
+        printf("aps_ramdisk_load_addr %s\n", out);
 
 		unmap_sysmem((const void*) data);
 	}

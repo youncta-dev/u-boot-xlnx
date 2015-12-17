@@ -125,6 +125,7 @@ int board_eth_init(bd_t *bis)
 {
 	u32 ret = 0;
 
+    printf("%s\n", __func__);
 #ifdef CONFIG_XILINX_AXIEMAC
 	ret |= xilinx_axiemac_initialize(bis, XILINX_AXIEMAC_BASEADDR,
 						XILINX_AXIDMA_BASEADDR);
@@ -143,6 +144,7 @@ int board_eth_init(bd_t *bis)
 #endif
 
 #if defined(CONFIG_ZYNQ_GEM)
+
 # if defined(CONFIG_ZYNQ_GEM0)
 	ret |= zynq_gem_initialize(bis, ZYNQ_GEM_BASEADDR0,
 				   CONFIG_ZYNQ_GEM_PHY_ADDR0,
