@@ -1060,6 +1060,87 @@ static ulong mem_test_quick(vu_long *buf, ulong start_addr, ulong end_addr,
 	return 0;
 }
 
+
+static int do_mem_mstress(cmd_tbl_t *cmdtp, int flag, int argc,
+			char * const argv[])
+{
+	ulong addr, len;
+	vu_long *buf;
+    uchar* area;
+	ulong iteration_limit = 0;
+	int ret;
+	ulong errs = 0;	/* number of errors, or -1 if interrupted */
+	ulong pattern = 0;
+	int iteration;
+
+	addr = CONFIG_SYS_MEMTEST_START;
+
+
+	if (argc > 1)
+		if (strict_strtoul(argv[1], 16, &addr) < 0)
+			return CMD_RET_USAGE;
+
+	if (argc > 2)
+		if (strict_strtoul(argv[2], 16, &len) < 0)
+			return CMD_RET_USAGE;
+
+	if (argc > 3)
+		if (strict_strtoul(argv[3], 16, &iteration_limit) < 0)
+			return CMD_RET_USAGE;
+
+
+	printf("Stressing %08x with len %08x:\n", (uint)addr, (uint)len);
+
+
+	buf = map_sysmem(addr, 2*len);
+    area = (uchar*) buf;
+    memset(area, 0x55, len);
+
+	for (iteration = 0;
+			!iteration_limit || iteration < iteration_limit;
+			iteration++) {
+		if (ctrlc()) {
+			errs = -1UL;
+			break;
+		}
+
+		printf("Iteration: %6d\r", iteration + 1);
+		debug("\n");
+
+
+        memset(area+len, 0xaa, len);
+        memcpy(area+len, area, len);
+        errs = memcmp(area, area+len, len);
+
+		if (errs != 0)
+			break;
+	}
+
+	/*
+	 * Work-around for eldk-4.2 which gives this warning if we try to
+	 * case in the unmap_sysmem() call:
+	 * warning: initialization discards qualifiers from pointer target type
+	 */
+	{
+		void *vbuf = (void *)buf;
+
+
+		unmap_sysmem(vbuf);
+	}
+
+	if (errs != 0) {
+		/* Memory test was aborted - write a newline to finish off */
+		putc('\n');
+		ret = 1;
+	} else {
+		printf("Tested %d iteration(s) with %lu errors.\n",
+			iteration, errs);
+		ret = errs != 0;
+	}
+
+	return ret;
+}
+
 /*
  * Perform a memory test. A more complete alternative test can be
  * configured using CONFIG_SYS_ALT_MEMTEST. The complete test loops until
@@ -1453,6 +1534,11 @@ U_BOOT_CMD(
 	mtest,	5,	1,	do_mem_mtest,
 	"simple RAM read/write test",
 	"[start [end [pattern [iterations]]]]"
+);
+U_BOOT_CMD(
+	mstress,	4,	1,	do_mem_mstress,
+	"stress RAM read/write test, compile u-boot with d-cache enabled",
+	"[addr [len [iterations]]]"
 );
 #endif	/* CONFIG_CMD_MEMTEST */
 
