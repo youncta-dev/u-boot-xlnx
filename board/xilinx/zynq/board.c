@@ -87,6 +87,7 @@ int board_late_init(void)
 
     #ifdef CONFIG_TARGET_ZYNQ_YPACKET2
     si5347_configure();
+    vcs8572_configure();
     #endif
 
 	switch ((zynq_slcr_get_boot_mode()) & ZYNQ_BM_MASK) {
