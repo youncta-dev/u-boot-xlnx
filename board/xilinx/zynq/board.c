@@ -18,6 +18,7 @@ DECLARE_GLOBAL_DATA_PTR;
 
 #ifdef CONFIG_TARGET_ZYNQ_YPACKET2
 int si5347_configure(void);
+int vcs8572_configure(void);
 #endif
 
 #if (defined(CONFIG_FPGA) && !defined(CONFIG_SPL_BUILD)) || \
@@ -87,7 +88,7 @@ int board_late_init(void)
 
     #ifdef CONFIG_TARGET_ZYNQ_YPACKET2
     si5347_configure();
-    vcs8572_configure();
+
     #endif
 
 	switch ((zynq_slcr_get_boot_mode()) & ZYNQ_BM_MASK) {
@@ -113,6 +114,7 @@ int board_late_init(void)
 
 	return 0;
 }
+
 
 #ifdef CONFIG_DISPLAY_BOARDINFO
 int checkboard(void)
@@ -156,6 +158,11 @@ int board_eth_init(bd_t *bis)
 				   CONFIG_ZYNQ_GEM_PHY_ADDR1,
 				   CONFIG_ZYNQ_GEM_EMIO1);
 # endif
+#endif
+
+    /* Initialize PHY */
+#ifdef CONFIG_TARGET_ZYNQ_YPACKET2
+    vsc8572_configure();
 #endif
 	return ret;
 }
