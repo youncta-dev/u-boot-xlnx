@@ -16,7 +16,7 @@
 
 
 
-int si5347_configure(void);
+int vsc8572_configure(void);
 
 
 /*-----------------------------------------------------------------------
@@ -28,16 +28,9 @@ int si5347_configure(void);
 static int do_setup(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
 
-    if (strcmp(argv[1], "si5347") == 0)
-    {
-      #ifdef CONFIG_TARGET_ZYNQ_YPACKET2
-      si5347_configure();
-      #endif
-    }
-    else
-    {
-        printf("Unknown component\n");
-    }
+#ifdef CONFIG_TARGET_ZYNQ_YPACKET2
+    vsc8572_configure();
+#endif
 
 	return 0;
 }

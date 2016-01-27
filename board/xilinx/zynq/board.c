@@ -115,6 +115,12 @@ int board_late_init(void)
 	return 0;
 }
 
+int last_stage_init(void)
+{
+    vsc8572_configure();
+	return 0;
+}
+
 
 #ifdef CONFIG_DISPLAY_BOARDINFO
 int checkboard(void)
@@ -162,7 +168,7 @@ int board_eth_init(bd_t *bis)
 
     /* Initialize PHY */
 #ifdef CONFIG_TARGET_ZYNQ_YPACKET2
-    vsc8572_configure();
+    //vsc8572_configure();
 #endif
 	return ret;
 }

@@ -508,6 +508,9 @@ restart:
 			link_local_start();
 			break;
 #endif
+        case NONE:
+            goto done;
+            break;
 		default:
 			break;
 		}

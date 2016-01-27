@@ -328,7 +328,6 @@ static int zynq_gem_init(struct eth_device *dev, bd_t * bis)
 			SUPPORTED_1000baseT_Half |
 			SUPPORTED_1000baseT_Full;
 
-    printf("%s\n", __func__);
 
 	if (!priv->init) {
 		/* Disable all interrupts */
