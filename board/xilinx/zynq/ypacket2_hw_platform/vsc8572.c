@@ -50,7 +50,7 @@ int vsc8572_configure(void)
     /* nail down the isolate bit */
     miiphy_write(devname, 0x07, 0x00, 0x1140);
 
-    printf("vcs8572 configured\n");
+    printf("vsc8572 configured\n");
     return 0;
 }
 

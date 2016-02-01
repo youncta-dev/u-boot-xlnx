@@ -16,7 +16,7 @@
 
 
 
-int vsc8572_configure(void);
+int modem_configure(void);
 
 
 /*-----------------------------------------------------------------------
@@ -29,7 +29,7 @@ static int do_setup(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
 
 #ifdef CONFIG_TARGET_ZYNQ_YPACKET2
-    vsc8572_configure();
+    modem_configure();
 #endif
 
 	return 0;
