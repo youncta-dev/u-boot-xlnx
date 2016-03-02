@@ -96,7 +96,8 @@ int saveenv(void)
 			sector++;
 	}
 
-	puts("Erasing SPI flash...");
+	printf("Erasing %d bytes on SPI flash at %08x\n", sector * CONFIG_ENV_SECT_SIZE, env_new_offset);
+
 	ret = spi_flash_erase(env_flash, env_new_offset,
 				sector * CONFIG_ENV_SECT_SIZE);
 	if (ret)
@@ -261,7 +262,7 @@ int saveenv(void)
 	if (ret)
 		goto done;
 
-	puts("Erasing SPI flash...");
+	printf("Erasing %d bytes on SPI flash at %08x\n", sector * CONFIG_ENV_SECT_SIZE, CONFIG_ENV_OFFSET);
 	ret = spi_flash_erase(env_flash, CONFIG_ENV_OFFSET,
 		sector * CONFIG_ENV_SECT_SIZE);
 	if (ret)
