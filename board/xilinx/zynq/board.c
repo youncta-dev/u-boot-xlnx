@@ -93,7 +93,13 @@ int board_late_init(void)
 
 	switch ((zynq_slcr_get_boot_mode()) & ZYNQ_BM_MASK) {
 	case ZYNQ_BM_QSPI:
-		setenv("modeboot", "qspiboot");
+    {
+        char* bank = getenv("bank");
+        if ((bank != NULL) && (strcmp(bank, "1") == 0))
+		    setenv("modeboot", "qspibootbank1");
+        else
+		    setenv("modeboot", "qspibootbank0");
+    }
 		break;
 	case ZYNQ_BM_NAND:
 		setenv("modeboot", "nandboot");
