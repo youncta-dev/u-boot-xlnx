@@ -301,16 +301,22 @@
 		"bootm ${kernel_load_address} ${ramdisk_load_address} ${devicetree_load_address}\0" \
     "aps_ram_load_address=0x2000000\0" \
     "aps_size=0x6000000\0" \
+    "kernel_dtb_size=0x600000\0" \
     "aps0_qspi_address=0x1000000\0" \
     "aps1_qspi_address=0x7000000\0" \
+	"bank0args=setenv bootargs ${bootargs} rootfstype=squashfs root=/dev/mtdblock4 ro\0" \
+	"bank1args=setenv bootargs ${bootargs} rootfstype=squashfs root=/dev/mtdblock6 ro\0" \
+	"bootargs=console=ttyPS0,115200 earlyprintk\0" \
 	"qspibootbank0=echo Copying APS0 from QSPI flash to RAM... && " \
 		"sf probe 5:0 && " \
-		"sf read ${aps_ram_load_address} ${aps0_qspi_address} ${aps_size} && aps ${aps_ram_load_address} && " \
-        "bootm ${aps_kernel_load_addr} ${aps_ramdisk_load_addr} ${aps_dtb_load_addr}\0" \
+		"sf read ${aps_ram_load_address} ${aps0_qspi_address} ${kernel_dtb_size} && aps ${aps_ram_load_address} && " \
+		"run bank0args && " \
+        "bootm ${aps_kernel_load_addr} - ${aps_dtb_load_addr}\0" \
 	"qspibootbank1=echo Copying APS1 from QSPI flash to RAM... && " \
 		"sf probe 5:0 && " \
-		"sf read ${aps_ram_load_address} ${aps1_qspi_address} ${aps_size} && aps ${aps_ram_load_address} && " \
-        "bootm ${aps_kernel_load_addr} ${aps_ramdisk_load_addr} ${aps_dtb_load_addr}\0" \
+		"sf read ${aps_ram_load_address} ${aps1_qspi_address} ${kernel_dtb_size} && aps ${aps_ram_load_address} && " \
+		"run bank1args && " \
+        "bootm ${aps_kernel_load_addr} - ${aps_dtb_load_addr}\0" \
 	"updateboot=echo Downloading new boot ... && " \
 		"sf probe 5:0 && " \
 		"tftpboot 0x100000 boot.bin && " \
@@ -321,6 +327,11 @@
 		"tftpboot 0x100000 aps.bin && " \
 		"sf erase ${aps0_qspi_address} +${filesize} && " \
         "sf write ${fileaddr} ${aps0_qspi_address} ${filesize}\0" \
+	"updateaps1=echo Downloading new aps ... && " \
+		"sf probe 5:0 && " \
+		"tftpboot 0x100000 aps.bin && " \
+		"sf erase ${aps1_qspi_address} +${filesize} && " \
+        "sf write ${fileaddr} ${aps1_qspi_address} ${filesize}\0" \
 	"uenvboot=" \
 		"if run loadbootenv; then " \
 			"echo Loaded environment from ${bootenv}; " \
