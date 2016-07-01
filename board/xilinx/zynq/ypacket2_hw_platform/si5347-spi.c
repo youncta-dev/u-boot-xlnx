@@ -112,25 +112,36 @@ static void write_reg8(u16 addr, u8 val)
 }
 
 
-int si5347_configure(void)
+int si5347_configure(int samples_clk)
 {
+    si5347ab_revb_register_t* registers = &si5347ab_revb_registers_160[0];
+    
     printf("si5347 id: %02x %02x\n", read_reg8(0x0003), read_reg8(0x0002));
 
+    if (samples_clk == 100)
+    {
+        registers = &si5347ab_revb_registers_100[0];
+    }
+    else if (samples_clk == 125)
+    {
+        registers = &si5347ab_revb_registers_125[0];
+    }
+     
 
     int i = 0;
     for (i = 0; i < SI5347AB_REVB_REG_CONFIG_NUM_REGS; i++)
     {
         u8 reg;
-        u16 addr = si5347ab_revb_registers[i].address;
+        u16 addr = registers[i].address;
 
-        write_reg8(addr, si5347ab_revb_registers[i].value);
+        write_reg8(addr, registers[i].value);
 
-        reg = read_reg8(si5347ab_revb_registers[i].address);
+        reg = read_reg8(registers[i].address);
         
         if ((addr != 0x0414) && (addr != 0x0514) && (addr != 0x0614) && (addr != 0x0715) && (addr != 0x001c)) 
         {
-            if (reg != si5347ab_revb_registers[i].value)
-                printf("%04x -> %02x wrong %02x\n", addr, si5347ab_revb_registers[i].value, reg);
+            if (reg != registers[i].value)
+                printf("%04x -> %02x wrong %02x\n", addr, registers[i].value, reg);
         }
     }
     printf("si5347 configured\n");

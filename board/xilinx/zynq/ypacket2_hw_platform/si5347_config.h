@@ -30,7 +30,9 @@ typedef struct
 } si5347ab_revb_register_t;
 
 
-extern si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_NUM_REGS];
+extern si5347ab_revb_register_t si5347ab_revb_registers_100[SI5347AB_REVB_REG_CONFIG_NUM_REGS];
+extern si5347ab_revb_register_t si5347ab_revb_registers_125[SI5347AB_REVB_REG_CONFIG_NUM_REGS];
+extern si5347ab_revb_register_t si5347ab_revb_registers_160[SI5347AB_REVB_REG_CONFIG_NUM_REGS];
 
 /*
  * Design Report
