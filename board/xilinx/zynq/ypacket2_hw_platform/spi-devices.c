@@ -2,7 +2,7 @@
 #include <errno.h>
 #include <spi.h>
 
-#include "si5347-spi.h"
+#include "spi-devices.h"
 #include "si5347_config.h"
 
 
