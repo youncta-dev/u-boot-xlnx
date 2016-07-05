@@ -6,12 +6,8 @@
 #include "si5347_config.h"
 
 
-static unsigned int	bus = 1;
-static unsigned int	cs = 0;
-static unsigned int	mode = 0;
 
-
-static int si5347_send_receive(uchar* dout, uchar* din, int bitlen)
+static int spi_send_receive(int bus, int cs, int mode, uchar* dout, uchar* din, int bitlen)
 {
 	struct spi_slave *slave;
 	int ret = 0;
@@ -22,8 +18,7 @@ static int si5347_send_receive(uchar* dout, uchar* din, int bitlen)
 
 	snprintf(name, sizeof(name), "generic_%d:%d", bus, cs);
 	str = strdup(name);
-	ret = spi_get_bus_and_cs(bus, cs, 1000000, mode, "spi_generic_drv",
-				 str, &dev, &slave);
+	ret = spi_get_bus_and_cs(bus, cs, 1000000, mode, "spi_generic_drv", str, &dev, &slave);
 	if (ret)
 		return ret;
 #else
@@ -56,7 +51,28 @@ done:
 }
 
 
-static u8 read_reg8(u16 addr)
+static void ad9643_write_reg8(u8 addr, u8 val)
+{
+    u8 tx_buf0[4];
+    u8 tx_buf1[4];
+
+
+    tx_buf0[0] = AD9643_WRITE_DATA_CMD;
+    tx_buf0[1] = addr;
+    tx_buf0[2] = val;
+
+    spi_send_receive(AD9643_BUS, AD9643_CS, AD9643_MODE, tx_buf0, NULL, 24);  
+
+    // apply configuration
+    tx_buf1[0] = 0x00;
+    tx_buf1[1] = 0xff;
+    tx_buf1[2] = 0x01;
+
+    spi_send_receive(AD9643_BUS, AD9643_CS, AD9643_MODE, tx_buf1, NULL, 24);  
+
+}
+
+static u8 si5347_read_reg8(u16 addr)
 {
     u8 tx_buf[4];
     u8 rx_buf[4];
@@ -68,25 +84,25 @@ static u8 read_reg8(u16 addr)
 
 
     // First write page
-    tx_buf[0] = SET_ADDRESS_CMD;
-    tx_buf[1] = PAGE_SET_REG;
-    tx_buf[2] = WRITE_DATA_CMD;
+    tx_buf[0] = SI5347_SET_ADDRESS_CMD;
+    tx_buf[1] = SI5347_PAGE_SET_REG;
+    tx_buf[2] = SI5347_WRITE_DATA_CMD;
     tx_buf[3] = page;
 
-    si5347_send_receive(tx_buf, NULL, 32);  
+    spi_send_receive(SI5347_BUS, SI5347_CS, SI5347_MODE, tx_buf, NULL, 32);  
 
-    tx_buf[0] = SET_ADDRESS_CMD;
+    tx_buf[0] = SI5347_SET_ADDRESS_CMD;
     tx_buf[1] = reg;
-    tx_buf[2] = READ_DATA_CMD;
+    tx_buf[2] = SI5347_READ_DATA_CMD;
 
-    si5347_send_receive(tx_buf, rx_buf, 32);  
+    spi_send_receive(SI5347_BUS, SI5347_CS, SI5347_MODE, tx_buf, rx_buf, 32);  
 
     return rx_buf[3];
 
 
 }
 
-static void write_reg8(u16 addr, u8 val)
+static void si5347_write_reg8(u16 addr, u8 val)
 {
     u8 tx_buf[4];
 
@@ -95,19 +111,19 @@ static void write_reg8(u16 addr, u8 val)
 
 
     // First write page
-    tx_buf[0] = SET_ADDRESS_CMD;
-    tx_buf[1] = PAGE_SET_REG;
-    tx_buf[2] = WRITE_DATA_CMD;
+    tx_buf[0] = SI5347_SET_ADDRESS_CMD;
+    tx_buf[1] = SI5347_PAGE_SET_REG;
+    tx_buf[2] = SI5347_WRITE_DATA_CMD;
     tx_buf[3] = page;
 
-    si5347_send_receive(tx_buf, NULL, 32);  
+    spi_send_receive(SI5347_BUS, SI5347_CS, SI5347_MODE, tx_buf, NULL, 32);  
 
-    tx_buf[0] = SET_ADDRESS_CMD;
+    tx_buf[0] = SI5347_SET_ADDRESS_CMD;
     tx_buf[1] = reg;
-    tx_buf[2] = WRITE_DATA_CMD;
+    tx_buf[2] = SI5347_WRITE_DATA_CMD;
     tx_buf[3] = val;
 
-    si5347_send_receive(tx_buf, NULL, 32);  
+    spi_send_receive(SI5347_BUS, SI5347_CS, SI5347_MODE, tx_buf, NULL, 32);  
 
 }
 
@@ -116,7 +132,7 @@ int si5347_configure(int samples_clk)
 {
     si5347ab_revb_register_t* registers = &si5347ab_revb_registers_160[0];
     
-    printf("si5347 id: %02x %02x\n", read_reg8(0x0003), read_reg8(0x0002));
+    printf("si5347 id: %02x %02x\n", si5347_read_reg8(0x0003), si5347_read_reg8(0x0002));
 
     if (samples_clk == 100)
     {
@@ -134,9 +150,9 @@ int si5347_configure(int samples_clk)
         u8 reg;
         u16 addr = registers[i].address;
 
-        write_reg8(addr, registers[i].value);
+        si5347_write_reg8(addr, registers[i].value);
 
-        reg = read_reg8(registers[i].address);
+        reg = si5347_read_reg8(registers[i].address);
         
         if ((addr != 0x0414) && (addr != 0x0514) && (addr != 0x0614) && (addr != 0x0715) && (addr != 0x001c)) 
         {
@@ -148,5 +164,12 @@ int si5347_configure(int samples_clk)
     return 0;
 }
 
+int ad9643_configure()
+{
+    // setup "offset binary" output format
+    ad9643_write_reg8(0x14, 0x04);
+
+    return 0;
+}
 
 

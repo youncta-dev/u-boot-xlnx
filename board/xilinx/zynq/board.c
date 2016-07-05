@@ -19,6 +19,7 @@ DECLARE_GLOBAL_DATA_PTR;
 #ifdef CONFIG_TARGET_ZYNQ_YPACKET2
 int si5347_configure(int);
 int vcs8572_configure(void);
+int ad9643_configure(void);
 #endif
 
 #if (defined(CONFIG_FPGA) && !defined(CONFIG_SPL_BUILD)) || \
@@ -90,6 +91,7 @@ int board_late_init(void)
     int samples_clk = 160;
     char* clk = getenv("samples_clk");
 
+    ad9643_configure();
     if (clk != NULL)
     {
         if (strcmp("125", clk) == 0)
@@ -100,8 +102,9 @@ int board_late_init(void)
             samples_clk = 160;
     }
 
-    printf("samples clk %d\n", samples_clk);
+    printf("samples_clk %d\n", samples_clk);
     si5347_configure(samples_clk);
+
 
     #endif
 
