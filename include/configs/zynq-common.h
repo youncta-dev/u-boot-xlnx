@@ -395,11 +395,11 @@
 #define CONFIG_IPADDR	192.168.0.50
 #define CONFIG_SERVERIP	192.168.0.40
 
-/* default boot is according to the bootmode switch settings */
+/* default boot is accorsding to the bootmode switch settings */
 #if defined(CONFIG_CMD_ZYNQ_RSA)
 #define CONFIG_BOOTCOMMAND		"run rsa_$modeboot"
 #else
-#define CONFIG_BOOTCOMMAND		"run $modeboot"
+#define CONFIG_BOOTCOMMAND		"mii write 07 00 1540; run $modeboot"
 #endif
 #define CONFIG_BOOTDELAY		4 /* -1 to Disable autoboot */
 #define CONFIG_SYS_LOAD_ADDR		0 /* default? */
