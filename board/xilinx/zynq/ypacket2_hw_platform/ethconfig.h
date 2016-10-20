@@ -1,5 +1,5 @@
-#ifndef _VSC8572_H_
-#define _VSC8572_H_
+#ifndef _ETHCONFIG_H_
+#define _ETHCONFIG_H_
 
 #include <miiphy.h>
 
@@ -16,7 +16,7 @@
 #define PAGE_2              0x0002
 #define PAGE_3              0x0003
 
-int vcs8572_configure(void);
+int eth_configure(void);
 
 
 #endif

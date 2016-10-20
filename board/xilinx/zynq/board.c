@@ -18,7 +18,7 @@ DECLARE_GLOBAL_DATA_PTR;
 
 #ifdef CONFIG_TARGET_ZYNQ_YPACKET2
 int si5347_configure(int);
-int vcs8572_configure(void);
+int eth_configure(void);
 int ad9643_configure(void);
 #endif
 
@@ -88,7 +88,7 @@ int board_late_init(void)
 {
 
     #ifdef CONFIG_TARGET_ZYNQ_YPACKET2
-    int samples_clk = 160;
+    int samples_clk = 100;
     char* clk = getenv("samples_clk");
 
     ad9643_configure();
@@ -140,7 +140,9 @@ int board_late_init(void)
 
 int last_stage_init(void)
 {
-    vsc8572_configure();
+#ifdef CONFIG_TARGET_ZYNQ_YPACKET2
+    eth_configure();
+#endif
 	return 0;
 }
 
@@ -191,7 +193,7 @@ int board_eth_init(bd_t *bis)
 
     /* Initialize PHY */
 #ifdef CONFIG_TARGET_ZYNQ_YPACKET2
-    //vsc8572_configure();
+
 #endif
 	return ret;
 }

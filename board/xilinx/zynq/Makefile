@@ -55,8 +55,8 @@ endif
 
 ifeq ($(CONFIG_TARGET_ZYNQ_YPACKET2),y)
 obj-y += ypacket2_hw_platform/spi-devices.o ypacket2_hw_platform/si5347_config.o
-obj-y += ypacket2_hw_platform/vsc8572.o ypacket2_hw_platform/vsc8572.o
-obj-y += ypacket2_hw_platform/vsc8572.o ypacket2_hw_platform/modem.o
+obj-y += ypacket2_hw_platform/ethconfig.o ypacket2_hw_platform/ethconfig.o
+obj-y += ypacket2_hw_platform/ethconfig.o ypacket2_hw_platform/modem.o
 endif
 
 
