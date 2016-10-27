@@ -25,6 +25,8 @@
 #include <asm/arch/sys_proto.h>
 #include <asm-generic/errno.h>
 
+#define _DEBUG  0
+
 #if !defined(CONFIG_PHYLIB)
 # error XILINX_GEM_ETHERNET requires PHYLIB
 #endif
@@ -112,6 +114,9 @@
 #define ZYNQ_GEM_FREQUENCY_10	2500000UL
 #define ZYNQ_GEM_FREQUENCY_100	25000000UL
 #define ZYNQ_GEM_FREQUENCY_1000	125000000UL
+
+u16 fake_phy_regs[] = { 0x1040, 0x182C, 0xDEAD, 0xBEEF, 0x0000, 0x0000, 0x0000, 0x0000 };
+
 
 /* Device registers */
 struct zynq_gem_regs {
@@ -226,6 +231,11 @@ static u32 phyread(struct eth_device *dev, u32 phy_addr, u32 regnum, u16 *val)
 {
 	u32 ret;
 
+    if ((CONFIG_ZYNQ_GEM1_PHY_LESS == 1) && (phy_addr == CONFIG_ZYNQ_GEM_PHY_ADDR1)) {
+        *val = fake_phy_regs[regnum];
+        return 0;
+    }   
+
 	ret = phy_setup_op(dev, phy_addr, regnum,
 				ZYNQ_GEM_PHYMNTNC_OP_R_MASK, val);
 
@@ -240,6 +250,9 @@ static u32 phywrite(struct eth_device *dev, u32 phy_addr, u32 regnum, u16 data)
 {
 	debug("%s: phy_addr %d, regnum 0x%x, data 0x%x\n", __func__, phy_addr,
 	      regnum, data);
+
+    if ((CONFIG_ZYNQ_GEM1_PHY_LESS == 1) && (phy_addr == CONFIG_ZYNQ_GEM_PHY_ADDR1)) 
+        return 0;
 
 	return phy_setup_op(dev, phy_addr, regnum,
 				ZYNQ_GEM_PHYMNTNC_OP_W_MASK, &data);
@@ -256,7 +269,7 @@ static void phy_detection(struct eth_device *dev)
 		if ((phyreg != 0xFFFF) &&
 		    ((phyreg & PHY_DETECT_MASK) == PHY_DETECT_MASK)) {
 			/* Found a valid PHY address */
-			debug("Default phy address %d is valid\n",
+			printf("Default phy address %d is valid\n",
 			      priv->phyaddr);
 			return;
 		} else {

@@ -70,6 +70,12 @@
 	};
 };
 
+
+&i2c1 {
+
+    status = "okay";
+};
+
 &spi1 {
 
     status = "okay";
@@ -142,14 +148,7 @@
 &gem1 {
 	status = "okay";
     phy-mode = "sgmii";
-
-    phy-handle = <&phy1>;
-
-    phy1: phy@16 {
-                compatible = "Xilinx PCS/PMA PHY";
-                device_type = "ethernet-phy";
-                reg = <16>;
-    };
+    fixed-link = <17 1 1000 0 0>;
 
 };
 
