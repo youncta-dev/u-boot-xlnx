@@ -399,9 +399,9 @@
 #if defined(CONFIG_CMD_ZYNQ_RSA)
 #define CONFIG_BOOTCOMMAND		"run rsa_$modeboot"
 #else
-#define CONFIG_BOOTCOMMAND		"mii write 07 00 1540; run $modeboot"
+#define CONFIG_BOOTCOMMAND		"run $modeboot"
 #endif
-#define CONFIG_BOOTDELAY		4 /* -1 to Disable autoboot */
+#define CONFIG_BOOTDELAY		-1 /* -1 to Disable autoboot */
 #define CONFIG_SYS_LOAD_ADDR		0 /* default? */
 
 /* Miscellaneous configurable options */
