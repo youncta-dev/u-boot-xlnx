@@ -38,6 +38,7 @@
 #define CONFIG_CMD_SETUP
 #define CONFIG_LAST_STAGE_INIT
 #define CONFIG_CMD_APS
+#define CONFIG_CMD_SWITCH
 #define CONFIG_SYS_ALT_MEMTEST
 
 /* Define YPACKET2 PS Clock Frequency to 50MHz */

@@ -115,7 +115,7 @@
 #define ZYNQ_GEM_FREQUENCY_100	25000000UL
 #define ZYNQ_GEM_FREQUENCY_1000	125000000UL
 
-u16 fake_phy_regs[] = { 0x1040, 0x182C, 0xDEAD, 0xBEEF, 0x0000, 0x0000, 0x0000, 0x0000 };
+u16 fake_phy_regs[] = { 0x1140, 0x182c, 0x0013, 0x0007, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0200, 0x0c00, 0x0000 };
 
 
 /* Device registers */
@@ -418,24 +418,28 @@ static int zynq_gem_init(struct eth_device *dev, bd_t * bis)
 	priv->phydev = phydev;
 	phy_config(phydev);
 	phy_startup(phydev);
+    phydev->speed = SPEED_1000;
 
 	if (!phydev->link) {
 		printf("%s: No link.\n", phydev->dev->name);
 		return -1;
 	}
-
+    
 	switch (phydev->speed) {
 	case SPEED_1000:
+
 		writel(ZYNQ_GEM_NWCFG_INIT | ZYNQ_GEM_NWCFG_SPEED1000,
 		       &regs->nwcfg);
 		clk_rate = ZYNQ_GEM_FREQUENCY_1000;
 		break;
 	case SPEED_100:
+
 		writel(ZYNQ_GEM_NWCFG_INIT | ZYNQ_GEM_NWCFG_SPEED100,
 		       &regs->nwcfg);
 		clk_rate = ZYNQ_GEM_FREQUENCY_100;
 		break;
 	case SPEED_10:
+
 		clk_rate = ZYNQ_GEM_FREQUENCY_10;
 		break;
 	}

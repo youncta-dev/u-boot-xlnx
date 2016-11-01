@@ -175,6 +175,7 @@ obj-$(CONFIG_CMD_UBIFS) += cmd_ubifs.o
 obj-$(CONFIG_CMD_UNIVERSE) += cmd_universe.o
 obj-$(CONFIG_CMD_UNZIP) += cmd_unzip.o
 obj-$(CONFIG_CMD_APS) += cmd_aps.o
+obj-$(CONFIG_CMD_SWITCH) += cmd_switch.o
 ifdef CONFIG_LZMA
 obj-$(CONFIG_CMD_LZMADEC) += cmd_lzmadec.o
 endif

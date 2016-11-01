@@ -3,21 +3,16 @@
 
 #include <miiphy.h>
 
-/* Ports */
-#define PORT_0_ADD  0x10
-#define PORT_1_ADD  0x11
-
-/* Registers */
-#define PAGE_SEL_REG        0x1f
-
-#define PAGE_G              0x0010
-#define PAGE_M              0x0000
-#define PAGE_1              0x0001
-#define PAGE_2              0x0002
-#define PAGE_3              0x0003
+#define GIGE_RESET      0x00000010
+#define CONF_VALID      0x00000020
+#define AN_CONF_VALID   0x00000040
+#define AN_RESTART      0x00000080
 
 int eth_configure(void);
 
+unsigned int get_counter(int port, int counter);
+unsigned short get_phy_reg(int port, int page, int reg);
+void toggle_bit();
 
 #endif
 

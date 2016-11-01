@@ -13083,7 +13083,6 @@ ps7_init()
   ret = ps7_config (ps7_peripherals_init_data);
   if (ret != PS7_INIT_SUCCESS) return ret;
   //xil_printf ("\n PCW Silicon Version : %d.0", pcw_ver);
-  printf("PS7 init completed\n");
   return PS7_INIT_SUCCESS;
 }
 

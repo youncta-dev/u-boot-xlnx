@@ -147,7 +147,7 @@
 
 &gem1 {
 	status = "okay";
-    phy-mode = "sgmii";
+    phy-mode = "gmii";
     fixed-link = <17 1 1000 0 0>;
 
 };
