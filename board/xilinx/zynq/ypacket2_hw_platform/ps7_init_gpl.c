@@ -1031,16 +1031,6 @@ unsigned long ps7_ddr_init_data_3_0[] = {
     // .. ..     ==> MASK : 0x01FF8000U    VAL : 0x00200000U
     // .. .. 
     EMIT_MASKWRITE(0XF80060B8, 0x01FFFFFFU ,0x00200066U),
-    // .. .. START: RESET ECC ERROR
-    // .. .. Clear_Uncorrectable_DRAM_ECC_error = 1
-    // .. .. ==> 0XF80060C4[0:0] = 0x00000001U
-    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-    // .. .. Clear_Correctable_DRAM_ECC_error = 1
-    // .. .. ==> 0XF80060C4[1:1] = 0x00000001U
-    // .. ..     ==> MASK : 0x00000002U    VAL : 0x00000002U
-    // .. .. 
-    EMIT_MASKWRITE(0XF80060C4, 0x00000003U ,0x00000003U),
-    // .. .. FINISH: RESET ECC ERROR
     // .. .. Clear_Uncorrectable_DRAM_ECC_error = 0x0
     // .. .. ==> 0XF80060C4[0:0] = 0x00000000U
     // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000000U
@@ -3868,11 +3858,11 @@ unsigned long ps7_peripherals_init_data_3_0[] = {
     // .. .. START: ENET RESET
     // .. .. .. START: ENET0 RESET
     // .. .. .. .. START: DIR MODE BANK 0
-    // .. .. .. .. DIRECTION_0 = 0x0
-    // .. .. .. .. ==> 0XE000A204[31:0] = 0x00000000U
-    // .. .. .. ..     ==> MASK : 0xFFFFFFFFU    VAL : 0x00000000U
+    // .. .. .. .. DIRECTION_0 = 0x1
+    // .. .. .. .. ==> 0XE000A204[31:0] = 0x00000001U
+    // .. .. .. ..     ==> MASK : 0xFFFFFFFFU    VAL : 0x00000001U
     // .. .. .. .. 
-    EMIT_MASKWRITE(0XE000A204, 0xFFFFFFFFU ,0x00000000U),
+    EMIT_MASKWRITE(0XE000A204, 0xFFFFFFFFU ,0x00000001U),
     // .. .. .. .. FINISH: DIR MODE BANK 0
     // .. .. .. .. START: DIR MODE BANK 1
     // .. .. .. .. FINISH: DIR MODE BANK 1
@@ -3893,11 +3883,11 @@ unsigned long ps7_peripherals_init_data_3_0[] = {
     // .. .. .. .. START: MASK_DATA_1_MSW HIGH BANK [53:48]
     // .. .. .. .. FINISH: MASK_DATA_1_MSW HIGH BANK [53:48]
     // .. .. .. .. START: OUTPUT ENABLE BANK 0
-    // .. .. .. .. OP_ENABLE_0 = 0x0
-    // .. .. .. .. ==> 0XE000A208[31:0] = 0x00000000U
-    // .. .. .. ..     ==> MASK : 0xFFFFFFFFU    VAL : 0x00000000U
+    // .. .. .. .. OP_ENABLE_0 = 0x1
+    // .. .. .. .. ==> 0XE000A208[31:0] = 0x00000001U
+    // .. .. .. ..     ==> MASK : 0xFFFFFFFFU    VAL : 0x00000001U
     // .. .. .. .. 
-    EMIT_MASKWRITE(0XE000A208, 0xFFFFFFFFU ,0x00000000U),
+    EMIT_MASKWRITE(0XE000A208, 0xFFFFFFFFU ,0x00000001U),
     // .. .. .. .. FINISH: OUTPUT ENABLE BANK 0
     // .. .. .. .. START: OUTPUT ENABLE BANK 1
     // .. .. .. .. FINISH: OUTPUT ENABLE BANK 1
@@ -5299,16 +5289,6 @@ unsigned long ps7_ddr_init_data_2_0[] = {
     // .. ..     ==> MASK : 0x01FF8000U    VAL : 0x00200000U
     // .. .. 
     EMIT_MASKWRITE(0XF80060B8, 0x01FFFFFFU ,0x00200066U),
-    // .. .. START: RESET ECC ERROR
-    // .. .. Clear_Uncorrectable_DRAM_ECC_error = 1
-    // .. .. ==> 0XF80060C4[0:0] = 0x00000001U
-    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-    // .. .. Clear_Correctable_DRAM_ECC_error = 1
-    // .. .. ==> 0XF80060C4[1:1] = 0x00000001U
-    // .. ..     ==> MASK : 0x00000002U    VAL : 0x00000002U
-    // .. .. 
-    EMIT_MASKWRITE(0XF80060C4, 0x00000003U ,0x00000003U),
-    // .. .. FINISH: RESET ECC ERROR
     // .. .. Clear_Uncorrectable_DRAM_ECC_error = 0x0
     // .. .. ==> 0XF80060C4[0:0] = 0x00000000U
     // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000000U
@@ -8223,11 +8203,11 @@ unsigned long ps7_peripherals_init_data_2_0[] = {
     // .. .. START: ENET RESET
     // .. .. .. START: ENET0 RESET
     // .. .. .. .. START: DIR MODE BANK 0
-    // .. .. .. .. DIRECTION_0 = 0x0
-    // .. .. .. .. ==> 0XE000A204[31:0] = 0x00000000U
-    // .. .. .. ..     ==> MASK : 0xFFFFFFFFU    VAL : 0x00000000U
+    // .. .. .. .. DIRECTION_0 = 0x1
+    // .. .. .. .. ==> 0XE000A204[31:0] = 0x00000001U
+    // .. .. .. ..     ==> MASK : 0xFFFFFFFFU    VAL : 0x00000001U
     // .. .. .. .. 
-    EMIT_MASKWRITE(0XE000A204, 0xFFFFFFFFU ,0x00000000U),
+    EMIT_MASKWRITE(0XE000A204, 0xFFFFFFFFU ,0x00000001U),
     // .. .. .. .. FINISH: DIR MODE BANK 0
     // .. .. .. .. START: DIR MODE BANK 1
     // .. .. .. .. FINISH: DIR MODE BANK 1
@@ -8248,11 +8228,11 @@ unsigned long ps7_peripherals_init_data_2_0[] = {
     // .. .. .. .. START: MASK_DATA_1_MSW HIGH BANK [53:48]
     // .. .. .. .. FINISH: MASK_DATA_1_MSW HIGH BANK [53:48]
     // .. .. .. .. START: OUTPUT ENABLE BANK 0
-    // .. .. .. .. OP_ENABLE_0 = 0x0
-    // .. .. .. .. ==> 0XE000A208[31:0] = 0x00000000U
-    // .. .. .. ..     ==> MASK : 0xFFFFFFFFU    VAL : 0x00000000U
+    // .. .. .. .. OP_ENABLE_0 = 0x1
+    // .. .. .. .. ==> 0XE000A208[31:0] = 0x00000001U
+    // .. .. .. ..     ==> MASK : 0xFFFFFFFFU    VAL : 0x00000001U
     // .. .. .. .. 
-    EMIT_MASKWRITE(0XE000A208, 0xFFFFFFFFU ,0x00000000U),
+    EMIT_MASKWRITE(0XE000A208, 0xFFFFFFFFU ,0x00000001U),
     // .. .. .. .. FINISH: OUTPUT ENABLE BANK 0
     // .. .. .. .. START: OUTPUT ENABLE BANK 1
     // .. .. .. .. FINISH: OUTPUT ENABLE BANK 1
@@ -9609,16 +9589,6 @@ unsigned long ps7_ddr_init_data_1_0[] = {
     // .. ..     ==> MASK : 0x01FF8000U    VAL : 0x00200000U
     // .. .. 
     EMIT_MASKWRITE(0XF80060B8, 0x01FFFFFFU ,0x00200066U),
-    // .. .. START: RESET ECC ERROR
-    // .. .. Clear_Uncorrectable_DRAM_ECC_error = 1
-    // .. .. ==> 0XF80060C4[0:0] = 0x00000001U
-    // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-    // .. .. Clear_Correctable_DRAM_ECC_error = 1
-    // .. .. ==> 0XF80060C4[1:1] = 0x00000001U
-    // .. ..     ==> MASK : 0x00000002U    VAL : 0x00000002U
-    // .. .. 
-    EMIT_MASKWRITE(0XF80060C4, 0x00000003U ,0x00000003U),
-    // .. .. FINISH: RESET ECC ERROR
     // .. .. Clear_Uncorrectable_DRAM_ECC_error = 0x0
     // .. .. ==> 0XF80060C4[0:0] = 0x00000000U
     // .. ..     ==> MASK : 0x00000001U    VAL : 0x00000000U
@@ -12503,11 +12473,11 @@ unsigned long ps7_peripherals_init_data_1_0[] = {
     // .. .. START: ENET RESET
     // .. .. .. START: ENET0 RESET
     // .. .. .. .. START: DIR MODE BANK 0
-    // .. .. .. .. DIRECTION_0 = 0x0
-    // .. .. .. .. ==> 0XE000A204[31:0] = 0x00000000U
-    // .. .. .. ..     ==> MASK : 0xFFFFFFFFU    VAL : 0x00000000U
+    // .. .. .. .. DIRECTION_0 = 0x1
+    // .. .. .. .. ==> 0XE000A204[31:0] = 0x00000001U
+    // .. .. .. ..     ==> MASK : 0xFFFFFFFFU    VAL : 0x00000001U
     // .. .. .. .. 
-    EMIT_MASKWRITE(0XE000A204, 0xFFFFFFFFU ,0x00000000U),
+    EMIT_MASKWRITE(0XE000A204, 0xFFFFFFFFU ,0x00000001U),
     // .. .. .. .. FINISH: DIR MODE BANK 0
     // .. .. .. .. START: DIR MODE BANK 1
     // .. .. .. .. FINISH: DIR MODE BANK 1
@@ -12528,11 +12498,11 @@ unsigned long ps7_peripherals_init_data_1_0[] = {
     // .. .. .. .. START: MASK_DATA_1_MSW HIGH BANK [53:48]
     // .. .. .. .. FINISH: MASK_DATA_1_MSW HIGH BANK [53:48]
     // .. .. .. .. START: OUTPUT ENABLE BANK 0
-    // .. .. .. .. OP_ENABLE_0 = 0x0
-    // .. .. .. .. ==> 0XE000A208[31:0] = 0x00000000U
-    // .. .. .. ..     ==> MASK : 0xFFFFFFFFU    VAL : 0x00000000U
+    // .. .. .. .. OP_ENABLE_0 = 0x1
+    // .. .. .. .. ==> 0XE000A208[31:0] = 0x00000001U
+    // .. .. .. ..     ==> MASK : 0xFFFFFFFFU    VAL : 0x00000001U
     // .. .. .. .. 
-    EMIT_MASKWRITE(0XE000A208, 0xFFFFFFFFU ,0x00000000U),
+    EMIT_MASKWRITE(0XE000A208, 0xFFFFFFFFU ,0x00000001U),
     // .. .. .. .. FINISH: OUTPUT ENABLE BANK 0
     // .. .. .. .. START: OUTPUT ENABLE BANK 1
     // .. .. .. .. FINISH: OUTPUT ENABLE BANK 1
@@ -13028,6 +12998,7 @@ ps7_debug()
   return PS7_INIT_SUCCESS;
 }
 
+
 int
 ps7_init() 
 {
@@ -13035,7 +13006,7 @@ ps7_init()
   unsigned long si_ver = ps7GetSiliconVersion ();
   int ret;
   //int pcw_ver = 0;
-
+  
   if (si_ver == PCW_SILICON_VERSION_1) {
     ps7_mio_init_data = ps7_mio_init_data_1_0;
     ps7_pll_init_data = ps7_pll_init_data_1_0;

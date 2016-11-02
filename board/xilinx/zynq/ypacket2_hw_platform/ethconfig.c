@@ -4,7 +4,7 @@
 #include "ethconfig.h"
 
 
-void toggle_bit(uint32_t* reg, uint32_t mask) 
+void toggle_bit(volatile uint32_t* reg, uint32_t mask) 
 {
     *reg = *reg | mask;
     mdelay(100);
