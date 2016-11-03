@@ -28,10 +28,10 @@ DECLARE_GLOBAL_DATA_PTR;
 
 unsigned int get_counter(int port, int counter);
 unsigned short get_phy_reg(int port, int page, int reg);
+void set_phy_reg(int port, int page, int reg, uint16_t val);
 
 
-
-static int do_read(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
+static int do_switch_read(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
 
 	int rc = 0;
@@ -53,7 +53,6 @@ static int do_read(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
     {
 	    int	port, page, reg;
 
-	    int rc = 0;
 
 	    if (argc < 5)
 		    return CMD_RET_USAGE;
@@ -69,11 +68,28 @@ static int do_read(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 	return (rc);
 }
 
-static int do_write(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
+static int do_switch_write(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
-	int	port, counter;
 
-	int rc = 0;
+    int rc = 0;
+
+    if (strcmp(argv[1], "phy") == 0) 
+    {
+	    int	port, page, reg;
+        uint16_t val;
+
+
+	    if (argc < 6)
+		    return CMD_RET_USAGE;
+
+	    port = simple_strtoul(argv[2], NULL, 16);
+	    page = simple_strtoul(argv[3], NULL, 16);
+	    reg = simple_strtoul(argv[4], NULL, 16);
+        val = simple_strtoul(argv[5], NULL, 16);
+
+	    set_phy_reg(port, page, reg, val);
+            
+    }
 
 	return (rc);
 }
@@ -81,9 +97,15 @@ static int do_write(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 
 /**************************************************/
 U_BOOT_CMD(
-	switch_read,	5,	1,	do_read,
+	switch_read,	5,	1,	do_switch_read,
 	"switch_read counter <port> <counter>",
 	"switch_read phy <port> <page> <reg>"
+);
+
+U_BOOT_CMD(
+	switch_write,	6,	1,	do_switch_write,
+	"write phy registers",
+	"switch_write phy <port> <page> <reg> <val>"
 );
 
 

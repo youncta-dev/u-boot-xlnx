@@ -46,6 +46,23 @@ unsigned short get_phy_reg(int port, int page, int reg)
     return data;
 }
 
+void set_phy_reg(int port, int page, int reg, uint16_t val)
+{
+    const char *devname = miiphy_get_current_dev();
+
+    // write page in reg 0x16
+    miiphy_write(devname, 0x1c, 0x19, page);
+    miiphy_write(devname, 0x1c, 0x18, 0x9400 | (port << 5) | 0x16);
+    mdelay(50);
+
+
+    miiphy_write(devname, 0x1c, 0x19, val);
+    miiphy_write(devname, 0x1c, 0x18, 0x9400 | (port << 5) | reg);
+    mdelay(50);
+
+}
+
+
 int eth_configure(void)
 {
 	unsigned short	data; 

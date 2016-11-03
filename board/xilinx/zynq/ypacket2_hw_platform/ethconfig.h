@@ -12,6 +12,7 @@ int eth_configure(void);
 
 unsigned int get_counter(int port, int counter);
 unsigned short get_phy_reg(int port, int page, int reg);
+void set_phy_reg(int port, int page, int reg, uint16_t val);
 void toggle_bit();
 
 #endif
