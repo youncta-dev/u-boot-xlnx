@@ -96,6 +96,11 @@
 		reg =<1>; //chipselect 1, ad9746 (dac)
 		spi-max-frequency= <100000>;
 	};
+	spidev@2{
+		compatible="spidev";
+		reg =<1>; //chipselect 2, iss328 (accelerometer)
+		spi-max-frequency= <100000>;
+	};
 
 };
 
