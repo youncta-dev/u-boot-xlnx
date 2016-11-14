@@ -18,6 +18,7 @@
 #include <asm/arch/clk.h>
 #include "../mtd/spi/sf_internal.h"
 
+
 /* QSPI Transmit Data Register */
 #define ZYNQ_QSPI_TXD_00_00_OFFSET	0x1C /* Transmit 4-byte inst, WO */
 #define ZYNQ_QSPI_TXD_00_01_OFFSET	0x80 /* Transmit 1-byte inst, WO */
@@ -346,7 +347,7 @@ static int zynq_qspi_set_speed(struct udevice *bus, uint speed)
 	uint32_t confr;
 	u8 baud_rate_val = 0;
 
-	debug("%s\n", __func__);
+	debug("%s plat->frequency %d\n", __func__, plat->frequency);
 	if (speed > plat->frequency)
 		speed = plat->frequency;
 
@@ -369,7 +370,7 @@ static int zynq_qspi_set_speed(struct udevice *bus, uint speed)
 	writel(confr, &regs->confr);
 	priv->freq = speed;
 
-	debug("zynq_spi_set_speed: regs=%p, mode=%d\n", priv->regs, priv->freq);
+	debug("zynq_spi_set_speed: speed=%d speed_hz=%d regs=%p, mode=%d\n", speed, plat->speed_hz, priv->regs, priv->freq);
 
 	return 0;
 }

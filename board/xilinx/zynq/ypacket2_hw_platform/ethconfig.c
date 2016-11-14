@@ -69,15 +69,16 @@ int eth_configure(void)
     int i = 0;
 	const char *devname;
 
-    volatile uint32_t* axi_gpio_0 = (uint32_t*) 0x41200000;
-    volatile uint32_t* fpga_reg_3 = (uint32_t*) 0x43c0000c;
+
+    volatile uint32_t* fpga_reg_1 = (uint32_t*) 0x43c10004;
+    volatile uint32_t* fpga_reg_3 = (uint32_t*) 0x43c1000c;
 
 	net_loop(NONE);
 
     devname = miiphy_get_current_dev();
 
 
-    *(axi_gpio_0) = 0x00000001;
+    *(fpga_reg_1) = 0x00000001;
     mdelay(100);
 
     miiphy_read(devname, 0x1b, 0x00, &data);
@@ -89,8 +90,8 @@ int eth_configure(void)
     miiphy_read(devname, 0x0a, 0x00, &data);
 
     // leds
-    //miiphy_write(devname, 0x00, 0x10, 0x8010);
-    //miiphy_write(devname, 0x08, 0x10, 0x80e0);
+    miiphy_write(devname, 0x00, 0x10, 0x8010);
+    miiphy_write(devname, 0x08, 0x10, 0x80e0);
     printf("Marvell switch active, port 0x0a reg 0 %04x\n", data);
 
     // autoneg enable

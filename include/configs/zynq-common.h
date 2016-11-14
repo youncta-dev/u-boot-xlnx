@@ -399,7 +399,7 @@
 #if defined(CONFIG_CMD_ZYNQ_RSA)
 #define CONFIG_BOOTCOMMAND		"run rsa_$modeboot"
 #else
-#define CONFIG_BOOTCOMMAND		"run $modeboot"
+#define CONFIG_BOOTCOMMAND		"mw.l 43c1000c 00201010; run $modeboot"
 #endif
 #define CONFIG_BOOTDELAY		-1 /* -1 to Disable autoboot */
 #define CONFIG_SYS_LOAD_ADDR		0 /* default? */
