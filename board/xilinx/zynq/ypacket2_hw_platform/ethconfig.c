@@ -77,16 +77,17 @@ int eth_configure(void)
 
     devname = miiphy_get_current_dev();
 
-
+    *(fpga_reg_1) = 0x00000000;
+    mdelay(500);
     *(fpga_reg_1) = 0x00000001;
-    mdelay(100);
+    mdelay(500);
 
     miiphy_read(devname, 0x1b, 0x00, &data);
     printf("Global 1 reg 0 %04x\n", data);
 
     // 1000 BASE-X 
     miiphy_write(devname, 0x0a, 0x00, 0x0049);
-    mdelay(100);
+    mdelay(200);
     miiphy_read(devname, 0x0a, 0x00, &data);
 
     // leds

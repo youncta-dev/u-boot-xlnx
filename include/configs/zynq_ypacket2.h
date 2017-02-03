@@ -44,8 +44,97 @@
 /* Define YPACKET2 PS Clock Frequency to 50MHz */
 #define CONFIG_ZYNQ_PS_CLK_FREQ	50000000UL
 
+#define CONFIG_ENV_OFFSET		0xf00000
 
 
 #include <configs/zynq-common.h>
+
+#undef CONFIG_IPADDR	
+#undef CONFIG_SERVERIP	
+
+#define CONFIG_IPADDR       172.30.0.252	
+#define CONFIG_SERVERIP	    172.30.0.250
+
+#undef CONFIG_BOOTDELAY
+#define CONFIG_BOOTDELAY    5
+
+#undef  CONFIG_EXTRA_ENV_SETTINGS
+
+#define CONFIG_EXTRA_ENV_SETTINGS	\
+	"ethaddr=00:0a:35:00:01:22\0"	\
+	"kernel_image=uImage\0"	\
+	"kernel_load_address=0x2080000\0" \
+	"ramdisk_image=uramdisk.image.gz\0"	\
+	"ramdisk_load_address=0x4000000\0"	\
+	"devicetree_image=devicetree.dtb\0"	\
+	"devicetree_load_address=0x2000000\0"	\
+	"loadbit_addr=0x100000\0"	\
+	"loadbootenv_addr=0x2000000\0" \
+	"kernel_size=0x500000\0"	\
+	"devicetree_size=0x20000\0"	\
+	"ramdisk_size=0x5E0000\0"	\
+	"boot_size=0xF00000\0"	\
+	"fdt_high=0x20000000\0"	\
+	"initrd_high=0x20000000\0"	\
+	"bootenv=uEnv.txt\0" \
+	"loadbootenv=load mmc 0 ${loadbootenv_addr} ${bootenv}\0" \
+	"importbootenv=echo Importing environment from SD ...; " \
+		"env import -t ${loadbootenv_addr} $filesize\0" \
+	"preboot=if test $modeboot = sdboot && env run sd_uEnvtxt_existence_test; " \
+			"then if env run loadbootenv; " \
+				"then env run importbootenv; " \
+			"fi; " \
+		"fi; \0" \
+	"qspiboot=echo Copying Linux from QSPI flash to RAM... && " \
+		"sf probe 0 0 0 && " \
+		"sf read ${kernel_load_address} 0x100000 ${kernel_size} && " \
+		"sf read ${devicetree_load_address} 0x600000 ${devicetree_size} && " \
+		"echo Copying ramdisk... && " \
+		"sf read ${ramdisk_load_address} 0x620000 ${ramdisk_size} && " \
+		"bootm ${kernel_load_address} ${ramdisk_load_address} ${devicetree_load_address}\0" \
+    "bank=0\0" \
+    "aps_ram_load_address=0x2000000\0" \
+    "aps_size=0x6000000\0" \
+    "kernel_dtb_size=0x600000\0" \
+    "aps0_qspi_address=0x1000000\0" \
+    "aps1_qspi_address=0x7000000\0" \
+	"bank0args=setenv bootargs ${bootargs} rootfstype=squashfs root=/dev/mtdblock4 ro\0" \
+	"bank1args=setenv bootargs ${bootargs} rootfstype=squashfs root=/dev/mtdblock6 ro\0" \
+	"bootargs=console=ttyPS0,115200 earlyprintk\0" \
+	"qspibootbank0=echo Copying APS0 from QSPI flash to RAM... && " \
+		"sf probe 5:0 && " \
+		"sf read ${aps_ram_load_address} ${aps0_qspi_address} ${kernel_dtb_size} && aps ${aps_ram_load_address} && " \
+		"run bank0args && " \
+        "bootm ${aps_kernel_load_addr} - ${aps_dtb_load_addr}\0" \
+	"qspibootbank1=echo Copying APS1 from QSPI flash to RAM... && " \
+		"sf probe 5:0 && " \
+		"sf read ${aps_ram_load_address} ${aps1_qspi_address} ${kernel_dtb_size} && aps ${aps_ram_load_address} && " \
+		"run bank1args && " \
+        "bootm ${aps_kernel_load_addr} - ${aps_dtb_load_addr}\0" \
+	"updateboot=echo Downloading new boot ... && " \
+		"sf probe 5:0 && " \
+		"tftpboot 0x100000 boot.bin && " \
+		"sf erase 0x0 +${filesize} && " \
+        "sf write ${fileaddr} 0x0 ${filesize}\0" \
+	"updateaps0=echo Downloading new aps ... && " \
+		"sf probe 5:0 && " \
+		"tftpboot 0x100000 aps.bin && " \
+		"sf erase ${aps0_qspi_address} +${filesize} && " \
+        "sf write ${fileaddr} ${aps0_qspi_address} ${filesize}\0" \
+	"updateaps1=echo Downloading new aps ... && " \
+		"sf probe 5:0 && " \
+		"tftpboot 0x100000 aps.bin && " \
+		"sf erase ${aps1_qspi_address} +${filesize} && " \
+        "sf write ${fileaddr} ${aps1_qspi_address} ${filesize}\0" \
+	"uenvboot=" \
+		"if run loadbootenv; then " \
+			"echo Loaded environment from ${bootenv}; " \
+			"run importbootenv; " \
+		"fi; " \
+		"if test -n $uenvcmd; then " \
+			"echo Running uenvcmd ...; " \
+			"run uenvcmd; " \
+		"fi\0"
+
 
 #endif /* __CONFIG_ZYNQ_YPACKET2_H */
