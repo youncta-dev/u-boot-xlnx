@@ -142,7 +142,9 @@ int si5347_configure(int samples_clk)
     {
         registers = &si5347ab_revb_registers_125[0];
     }
-     
+    
+    printf("serdes 125\n");
+    registers = &si5347ab_revb_registers_samples_100_serdes_125[0];
 
     int i = 0;
     for (i = 0; i < SI5347AB_REVB_REG_CONFIG_NUM_REGS; i++)
