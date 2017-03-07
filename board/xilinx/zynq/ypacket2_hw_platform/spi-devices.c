@@ -130,21 +130,9 @@ static void si5347_write_reg8(u16 addr, u8 val)
 
 int si5347_configure(int samples_clk)
 {
-    si5347ab_revb_register_t* registers = &si5347ab_revb_registers_160[0];
+    si5347ab_revb_register_t* registers = &si5347ab_revb_registers[0];
     
     printf("si5347 id: %02x %02x\n", si5347_read_reg8(0x0003), si5347_read_reg8(0x0002));
-
-    if (samples_clk == 100)
-    {
-        registers = &si5347ab_revb_registers_100[0];
-    }
-    else if (samples_clk == 125)
-    {
-        registers = &si5347ab_revb_registers_125[0];
-    }
-    
-    printf("serdes 125\n");
-    registers = &si5347ab_revb_registers_samples_100_serdes_125[0];
 
     int i = 0;
     for (i = 0; i < SI5347AB_REVB_REG_CONFIG_NUM_REGS; i++)
