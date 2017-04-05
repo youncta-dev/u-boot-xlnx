@@ -9,8 +9,8 @@
  * Part:		                                       Si5347AB Rev B
  * Design ID:                                          5347EVB1
  * Includes Pre/Post Download Control Register Writes: Yes
- * Created By:                                         ClockBuilder Pro v2.13 [2017-03-03]
- * Timestamp:                                          2017-03-07 14:26:43 GMT+01:00
+ * Created By:                                         ClockBuilder Pro v2.13.0.1 [2017-03-27]
+ * Timestamp:                                          2017-04-05 10:57:59 GMT+02:00
  *
  * A complete design report corresponding to this export is included at the end 
  * of this header file.
@@ -22,6 +22,7 @@
 
 #define SI5347AB_REVB_REG_CONFIG_NUM_REGS				643
 
+#error "cilluffo"
 typedef struct
 {
 	unsigned int address; /* 16-bit register address */
@@ -140,8 +141,8 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
 	{ 0x00B6, 0x00 },
 	{ 0x0102, 0x01 },
 	{ 0x0108, 0x02 },
-	{ 0x0109, 0x09 },
-	{ 0x010A, 0x3B },
+	{ 0x0109, 0x8C },
+	{ 0x010A, 0x00 },
 	{ 0x010B, 0x02 },
 	{ 0x010C, 0x03 },
 	{ 0x0112, 0x02 },
@@ -683,9 +684,10 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * Overview
  * ========
  * Part:         Si5347 Rev B
+ * Project File: C:\Users\youncta\Downloads\si5347\Si5347-5347EVB1_samples100_serdes125.slabtimeproj
  * Design ID:    5347EVB1
- * Created By:   ClockBuilder Pro v2.13 [2017-03-03]
- * Timestamp:    2017-03-07 14:26:43 GMT+01:00
+ * Created By:   ClockBuilder Pro v2.13.0.1 [2017-03-27]
+ * Timestamp:    2017-04-05 10:57:59 GMT+02:00
  * 
  * Design Rule Check
  * =================
@@ -696,7 +698,9 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * - DSPLL B: loop bandwidth 40 Hz or lower (38.2 Hz) with XTAL input on XA/XB [1]
  * - DSPLL C: loop bandwidth 40 Hz or lower (38.2 Hz) with XTAL input on XA/XB [1]
  * - DSPLL D: loop bandwidth 40 Hz or lower (27.4 Hz) with XTAL input on XA/XB [1]
+ * - OUT0: For the best signal integrity, Silicon Labs strongly recommends selecting the lowest LVCMOS output impedance (31 ?) and then choosing the proper external source resistor to produce the best signal shape at the end of the signal trace
  * - Revision B is not recommended for new designs
+ * - You have selected CMOS output. Please review AN862 "Optimizing Si534x Jitter Performance in Next Generation Internet Infrastructure Systems" to ensure your configuration meets your jitter requirements
  * 
  * Notes:
  * [1] A trade-off exists between jitter and wander with loop bandwidths at or below 40 Hz. See app note AN905 "Si534x External References; Optimizing Performance" for details. Driving XA/XB with a TCXO or OXCO may be helpful for designs that require low wander.
@@ -746,7 +750,7 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * 
  * Outputs:
  *    OUT0: 25 MHz
- *          Enabled, LVDS 2.5 V
+ *          Enabled, LVCMOS In-Phase 1.8 V 46 ?
  *          DSPLL C
  *    OUT1: 100 MHz
  *          Enabled, LVDS 1.8 V
@@ -908,32 +912,32 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * 
  * Revision: B
  * VDD:      1.8 V
- * Ta:       70 °C
+ * Ta:       70 \B0C
  * Airflow:  None
  * 
- * Total Power: 1.158 W, On Chip Power: 1.110 W, Tj: 94 °C
+ * Total Power: 1.146 W, On Chip Power: 1.104 W, Tj: 94 \B0C
  * 
- *         Frequency  Format   Voltage   Current     Power
- *         ---------  ------  --------  --------  --------
- * VDD                           1.8 V  291.6 mA    525 mW
- * VDDA                          3.3 V  120.4 mA    397 mW
- * VDDO0      25 MHz  LVDS       2.5 V   15.1 mA     38 mW
- * VDDO1     100 MHz  LVDS       1.8 V   15.6 mA     28 mW
- * VDDO2     125 MHz  LVDS       1.8 V   15.7 mA     28 mW
- * VDDO3     125 MHz  LVDS       1.8 V   15.7 mA     28 mW
- * VDDO4     250 MHz  LVDS       1.8 V   16.6 mA     30 mW
- * VDDO5     100 MHz  LVDS       1.8 V   15.6 mA     28 mW
- * VDDO6     100 MHz  LVDS       1.8 V   15.6 mA     28 mW
- * VDDO7     100 MHz  LVDS       1.8 V   15.6 mA     28 mW
- *                                      --------  --------
- *                               Total  537.3 mA   1.158 W
+ *         Frequency  Format              Voltage   Current     Power
+ *         ---------  -----------------  --------  --------  --------
+ * VDD                                      1.8 V  291.5 mA    525 mW
+ * VDDA                                     3.3 V  120.4 mA    397 mW
+ * VDDO0      25 MHz  LVCMOS (in-phase)     1.8 V   14.3 mA     26 mW
+ * VDDO1     100 MHz  LVDS                  1.8 V   15.6 mA     28 mW
+ * VDDO2     125 MHz  LVDS                  1.8 V   15.7 mA     28 mW
+ * VDDO3     125 MHz  LVDS                  1.8 V   15.7 mA     28 mW
+ * VDDO4     250 MHz  LVDS                  1.8 V   16.6 mA     30 mW
+ * VDDO5     100 MHz  LVDS                  1.8 V   15.6 mA     28 mW
+ * VDDO6     100 MHz  LVDS                  1.8 V   15.6 mA     28 mW
+ * VDDO7     100 MHz  LVDS                  1.8 V   15.6 mA     28 mW
+ *                                                 --------  --------
+ *                                          Total  536.4 mA   1.146 W
  * 
  * Note:
  * 
  * -Total power includes on- and off-chip power. This is a typical value and estimate only.
  * -Use an EVB for a more exact power measurement
  * -On-chip power excludes power dissipated in external terminations.
- * -Tj is junction temperature. When using a crystal (XTAL) reference, Tj must be less than 125 °C (on Si5347 Revision B) for device to comply with datasheet specifications.
+ * -Tj is junction temperature. When using a crystal (XTAL) reference, Tj must be less than 125 \B0C (on Si5347 Revision B) for device to comply with datasheet specifications.
  * 
  * Settings
  * ========
@@ -1070,12 +1074,12 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * 0x0108[0]     OUT0_PDN                  0              0x0             
  * 0x0108[1]     OUT0_OE                   1              0x1             
  * 0x0108[2]     OUT0_RDIV_FORCE2          0              0x0             
- * 0x0109[2:0]   OUT0_FORMAT               1              0x1             
+ * 0x0109[2:0]   OUT0_FORMAT               4              0x4             
  * 0x0109[3]     OUT0_SYNC_EN              1              0x1             
  * 0x0109[5:4]   OUT0_DIS_STATE            0              0x0             
- * 0x0109[7:6]   OUT0_CMOS_DRV             0              0x0             
- * 0x010A[3:0]   OUT0_CM                   11             0xB             
- * 0x010A[6:4]   OUT0_AMPL                 3              0x3             
+ * 0x0109[7:6]   OUT0_CMOS_DRV             2              0x2             
+ * 0x010A[3:0]   OUT0_CM                   0              0x0             
+ * 0x010A[6:4]   OUT0_AMPL                 0              0x0             
  * 0x010B[2:0]   OUT0_MUX_SEL              2              0x2             
  * 0x010B[7:6]   OUT0_INV                  0              0x0             
  * 0x010C[2:0]   OUT0_DIS_SRC              3              0x3             
