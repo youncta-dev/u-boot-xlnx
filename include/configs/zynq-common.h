@@ -307,6 +307,7 @@
 	"bank0args=setenv bootargs ${bootargs} rootfstype=squashfs root=/dev/mtdblock4 ro\0" \
 	"bank1args=setenv bootargs ${bootargs} rootfstype=squashfs root=/dev/mtdblock6 ro\0" \
 	"bootargs=console=ttyPS0,115200 earlyprintk\0" \
+	"bootfile=boot.bin\0" \
 	"qspibootbank0=echo Copying APS0 from QSPI flash to RAM... && " \
 		"sf probe 5:0 && " \
 		"sf read ${aps_ram_load_address} ${aps0_qspi_address} ${kernel_dtb_size} && aps ${aps_ram_load_address} && " \
@@ -319,7 +320,7 @@
         "bootm ${aps_kernel_load_addr} - ${aps_dtb_load_addr}\0" \
 	"updateboot=echo Downloading new boot ... && " \
 		"sf probe 5:0 && " \
-		"tftpboot 0x100000 boot.bin && " \
+		"tftpboot 0x100000 ${bootfile} && " \
 		"sf erase 0x0 +${filesize} && " \
         "sf write ${fileaddr} 0x0 ${filesize}\0" \
 	"updateaps0=echo Downloading new aps ... && " \
