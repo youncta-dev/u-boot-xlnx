@@ -71,6 +71,7 @@ int eth_configure(void)
 
 
     volatile uint32_t* fpga_reg_1 = (uint32_t*) 0x43c10004;
+    volatile uint32_t* fpga_reg_2 = (uint32_t*) 0x43c10008;
     volatile uint32_t* fpga_reg_3 = (uint32_t*) 0x43c1000c;
 
 	net_loop(NONE);
@@ -86,22 +87,27 @@ int eth_configure(void)
     printf("Global 1 reg 0 %04x\n", data);
 
     // 1000 BASE-X 
-    miiphy_write(devname, 0x0a, 0x00, 0x0049);
+    miiphy_write(devname, 0x0a, 0x00, 0x0009);
     mdelay(200);
     miiphy_read(devname, 0x0a, 0x00, &data);
 
     // leds
     miiphy_write(devname, 0x00, 0x10, 0x8010);
     miiphy_write(devname, 0x08, 0x10, 0x80e0);
-    printf("Marvell switch active, port 0x0a reg 0 %04x\n", data);
+    printf("HW switch, port 0x0a reg 0 %04x link %d, \n", data, (data & 0x0800) == 0x0800);
+
 
     // autoneg enable
-    *fpga_reg_3 = 0x00201000;    
+    *fpga_reg_3 = 0x00a01000;    
 
     toggle_bit(fpga_reg_3, GIGE_RESET);
     toggle_bit(fpga_reg_3, CONF_VALID);
     toggle_bit(fpga_reg_3, AN_CONF_VALID);
     toggle_bit(fpga_reg_3, AN_RESTART);
+
+    mdelay(500);
+    uint16_t pcs_status = *fpga_reg_2;
+    printf("Status PCS %04x, link %d sync %d\n", pcs_status, pcs_status & 0x0001, (pcs_status & 0x0002) == 0x0002 );
 
     return 0;
 }
