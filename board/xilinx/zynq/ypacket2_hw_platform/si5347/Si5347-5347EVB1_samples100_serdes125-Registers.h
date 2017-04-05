@@ -22,7 +22,7 @@
 
 #define SI5347AB_REVB_REG_CONFIG_NUM_REGS				643
 
-#error "cilluffo"
+
 typedef struct
 {
 	unsigned int address; /* 16-bit register address */
