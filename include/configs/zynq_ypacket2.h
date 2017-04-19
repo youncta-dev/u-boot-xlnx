@@ -97,10 +97,12 @@
     "aps_size=0x6000000\0" \
     "kernel_dtb_size=0x600000\0" \
     "aps0_qspi_address=0x1000000\0" \
+    "kernel0_qspi_address=0x1010000\0" \
     "aps1_qspi_address=0x7000000\0" \
-	"bank0args=setenv bootargs ${bootargs} rootfstype=squashfs root=/dev/mtdblock4 ro\0" \
-	"bank1args=setenv bootargs ${bootargs} rootfstype=squashfs root=/dev/mtdblock6 ro\0" \
-	"bootargs=console=ttyPS0,115200 earlyprintk\0" \
+	"bank0args=setenv bootargs ${bootargs} ${debugflags} rootfstype=squashfs root=/dev/mtdblock4 ro\0" \
+	"bank1args=setenv bootargs ${bootargs} ${debugflags} rootfstype=squashfs root=/dev/mtdblock6 ro\0" \
+	"bootargs=console=ttyPS0,115200 earlyprintk \0" \
+	"debugflags=nojffs2=1\0" \
 	"qspibootbank0=echo Copying APS0 from QSPI flash to RAM... && " \
 		"sf probe 5:0 && " \
 		"sf read ${aps_ram_load_address} ${aps0_qspi_address} ${kernel_dtb_size} && aps ${aps_ram_load_address} && " \
@@ -121,6 +123,11 @@
 		"tftpboot 0x100000 aps.bin && " \
 		"sf erase ${aps0_qspi_address} +${filesize} && " \
         "sf write ${fileaddr} ${aps0_qspi_address} ${filesize}\0" \
+	"updatekernel0=echo Downloading new kernel ... && " \
+		"sf probe 5:0 && " \
+		"tftpboot 0x100000 uImage && " \
+		"sf erase ${kernel0_qspi_address} +${filesize} && " \
+        "sf write ${fileaddr} ${kernel0_qspi_address} ${filesize}\0" \
 	"updateaps1=echo Downloading new aps ... && " \
 		"sf probe 5:0 && " \
 		"tftpboot 0x100000 aps.bin && " \
