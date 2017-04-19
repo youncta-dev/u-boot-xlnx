@@ -10,7 +10,7 @@
  * Design ID:                                          5347EVB1
  * Includes Pre/Post Download Control Register Writes: Yes
  * Created By:                                         ClockBuilder Pro v2.13.0.1 [2017-03-27]
- * Timestamp:                                          2017-04-05 10:57:59 GMT+02:00
+ * Timestamp:                                          2017-04-19 17:30:25 GMT+02:00
  *
  * A complete design report corresponding to this export is included at the end 
  * of this header file.
@@ -21,7 +21,6 @@
 #define SI5347AB_REVB_REG_CONFIG_HEADER
 
 #define SI5347AB_REVB_REG_CONFIG_NUM_REGS				643
-
 
 typedef struct
 {
@@ -134,9 +133,9 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
 	{ 0x00AF, 0x13 },
 	{ 0x00B0, 0x00 },
 	{ 0x00B1, 0x00 },
-	{ 0x00B2, 0x68 },
-	{ 0x00B3, 0xA3 },
-	{ 0x00B4, 0x1A },
+	{ 0x00B2, 0xF0 },
+	{ 0x00B3, 0x1F },
+	{ 0x00B4, 0x13 },
 	{ 0x00B5, 0x00 },
 	{ 0x00B6, 0x00 },
 	{ 0x0102, 0x01 },
@@ -262,7 +261,7 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
 	{ 0x0256, 0x03 },
 	{ 0x0257, 0x00 },
 	{ 0x0258, 0x00 },
-	{ 0x025C, 0x01 },
+	{ 0x025C, 0x02 },
 	{ 0x025D, 0x00 },
 	{ 0x025E, 0x00 },
 	{ 0x025F, 0x04 },
@@ -318,13 +317,13 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
 	{ 0x0323, 0x00 },
 	{ 0x0324, 0x00 },
 	{ 0x0325, 0x00 },
-	{ 0x0326, 0xE0 },
-	{ 0x0327, 0x08 },
+	{ 0x0326, 0xC0 },
+	{ 0x0327, 0x11 },
 	{ 0x0328, 0x00 },
 	{ 0x0329, 0x00 },
 	{ 0x032A, 0x00 },
 	{ 0x032B, 0x00 },
-	{ 0x032C, 0xA0 },
+	{ 0x032C, 0xF0 },
 	{ 0x032D, 0x00 },
 	{ 0x0338, 0x00 },
 	{ 0x0339, 0x00 },
@@ -509,10 +508,10 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
 	{ 0x0644, 0x00 },
 	{ 0x0645, 0x00 },
 	{ 0x0702, 0x01 },
-	{ 0x0709, 0x0F },
-	{ 0x070A, 0x1C },
-	{ 0x070B, 0x0E },
-	{ 0x070C, 0x0D },
+	{ 0x0709, 0x10 },
+	{ 0x070A, 0x1E },
+	{ 0x070B, 0x0D },
+	{ 0x070C, 0x0C },
 	{ 0x070D, 0x01 },
 	{ 0x070E, 0x3F },
 	{ 0x070F, 0x14 },
@@ -525,8 +524,8 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
 	{ 0x0717, 0x00 },
 	{ 0x0718, 0x00 },
 	{ 0x0719, 0x00 },
-	{ 0x071A, 0x04 },
-	{ 0x071B, 0x01 },
+	{ 0x071A, 0xC3 },
+	{ 0x071B, 0x00 },
 	{ 0x071C, 0x00 },
 	{ 0x071D, 0x00 },
 	{ 0x071E, 0x00 },
@@ -687,7 +686,7 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * Project File: C:\Users\youncta\Downloads\si5347\Si5347-5347EVB1_samples100_serdes125.slabtimeproj
  * Design ID:    5347EVB1
  * Created By:   ClockBuilder Pro v2.13.0.1 [2017-03-27]
- * Timestamp:    2017-04-05 10:57:59 GMT+02:00
+ * Timestamp:    2017-04-19 17:30:25 GMT+02:00
  * 
  * Design Rule Check
  * =================
@@ -697,7 +696,7 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * Warnings:
  * - DSPLL B: loop bandwidth 40 Hz or lower (38.2 Hz) with XTAL input on XA/XB [1]
  * - DSPLL C: loop bandwidth 40 Hz or lower (38.2 Hz) with XTAL input on XA/XB [1]
- * - DSPLL D: loop bandwidth 40 Hz or lower (27.4 Hz) with XTAL input on XA/XB [1]
+ * - DSPLL D: loop bandwidth 40 Hz or lower (38.2 Hz) with XTAL input on XA/XB [1]
  * - OUT0: For the best signal integrity, Silicon Labs strongly recommends selecting the lowest LVCMOS output impedance (31 ?) and then choosing the proper external source resistor to produce the best signal shape at the end of the signal trace
  * - Revision B is not recommended for new designs
  * - You have selected CMOS output. Please review AN862 "Optimizing Si534x Jitter Performance in Next Generation Internet Infrastructure Systems" to ensure your configuration meets your jitter requirements
@@ -707,7 +706,7 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * 
  * Device Grade
  * ============
- * Maximum Output Frequency: 250 MHz
+ * Maximum Output Frequency: 125 MHz
  * Frequency Synthesis Mode: Fractional
  * Frequency Plan Grade:     B
  * Minimum Base OPN:         Si5347B*
@@ -761,7 +760,7 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  *    OUT3: 125 MHz
  *          Enabled, LVDS 1.8 V
  *          DSPLL A (Free Run)
- *    OUT4: 250 MHz
+ *    OUT4: 125 MHz
  *          Enabled, LVDS 1.8 V
  *          DSPLL D
  *    OUT5: 100 MHz
@@ -836,23 +835,23 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  *         BW5:  63
  * DSPLL D:
  *    Fpfd = 1.9230769230769230... MHz [ 1 + 12/13 MHz ]
- *    Fdco = 1 GHz
+ *    Fdco = 750 MHz
  *    I/O Delay not enabled
- *    MD = 520
- *    N3 = 14.2 [ 14 + 1/5 ]
+ *    MD = 390
+ *    N3 = 18.9333333333333333... [ 18 + 14/15 ]
  *    Nominal Bandwidth:
  *      Desired: 40.000 Hz
- *      Actual:  27.450 Hz
+ *      Actual:  38.234 Hz
  *      Coefficients:
- *         BW0:  15
- *         BW1:  28
- *         BW2:  14
- *         BW3:  13
+ *         BW0:  16
+ *         BW1:  30
+ *         BW2:  13
+ *         BW3:  12
  *         BW4:  1
  *         BW5:  63
  *    Fastlock Bandwidth:
  *      Desired: 1.000 kHz
- *      Actual:  879.588 Hz
+ *      Actual:  612.348 Hz
  *      Coefficients:
  *         BW0:  20
  *         BW1:  40
@@ -873,7 +872,7 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  *    R1 = 10
  *    R2 = 6
  *    R3 = 8
- *    R4 = 4
+ *    R4 = 6
  *    R5 = 10
  *    R6 = 10
  *    R7 = 10
@@ -899,7 +898,7 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * OUT1    100 MHz    A      N/A            
  * OUT2    125 MHz    B      0.000000       
  * OUT3    125 MHz    A      N/A            
- * OUT4    250 MHz    D      0.000000       
+ * OUT4    125 MHz    D      0.000000       
  * OUT5    100 MHz    A      N/A            
  * OUT6    100 MHz    A      N/A            
  * OUT7    100 MHz    A      N/A            
@@ -912,32 +911,32 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * 
  * Revision: B
  * VDD:      1.8 V
- * Ta:       70 \B0C
+ * Ta:       70 °C
  * Airflow:  None
  * 
- * Total Power: 1.146 W, On Chip Power: 1.104 W, Tj: 94 \B0C
+ * Total Power: 1.135 W, On Chip Power: 1.093 W, Tj: 94 °C
  * 
  *         Frequency  Format              Voltage   Current     Power
  *         ---------  -----------------  --------  --------  --------
- * VDD                                      1.8 V  291.5 mA    525 mW
+ * VDD                                      1.8 V  286.2 mA    515 mW
  * VDDA                                     3.3 V  120.4 mA    397 mW
  * VDDO0      25 MHz  LVCMOS (in-phase)     1.8 V   14.3 mA     26 mW
  * VDDO1     100 MHz  LVDS                  1.8 V   15.6 mA     28 mW
  * VDDO2     125 MHz  LVDS                  1.8 V   15.7 mA     28 mW
  * VDDO3     125 MHz  LVDS                  1.8 V   15.7 mA     28 mW
- * VDDO4     250 MHz  LVDS                  1.8 V   16.6 mA     30 mW
+ * VDDO4     125 MHz  LVDS                  1.8 V   15.7 mA     28 mW
  * VDDO5     100 MHz  LVDS                  1.8 V   15.6 mA     28 mW
  * VDDO6     100 MHz  LVDS                  1.8 V   15.6 mA     28 mW
  * VDDO7     100 MHz  LVDS                  1.8 V   15.6 mA     28 mW
  *                                                 --------  --------
- *                                          Total  536.4 mA   1.146 W
+ *                                          Total  530.3 mA   1.135 W
  * 
  * Note:
  * 
  * -Total power includes on- and off-chip power. This is a typical value and estimate only.
  * -Use an EVB for a more exact power measurement
  * -On-chip power excludes power dissipated in external terminations.
- * -Tj is junction temperature. When using a crystal (XTAL) reference, Tj must be less than 125 \B0C (on Si5347 Revision B) for device to comply with datasheet specifications.
+ * -Tj is junction temperature. When using a crystal (XTAL) reference, Tj must be less than 125 °C (on Si5347 Revision B) for device to comply with datasheet specifications.
  * 
  * Settings
  * ========
@@ -1069,7 +1068,7 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * 0x00A3[34:0]  LOL_CLR_DELAY_PLLA        0              0x000000000     
  * 0x00A8[34:0]  LOL_CLR_DELAY_PLLB        1253360        0x000131FF0     
  * 0x00AD[34:0]  LOL_CLR_DELAY_PLLC        1253360        0x000131FF0     
- * 0x00B2[34:0]  LOL_CLR_DELAY_PLLD        1745768        0x0001AA368     
+ * 0x00B2[34:0]  LOL_CLR_DELAY_PLLD        1253360        0x000131FF0     
  * 0x0102[0]     OUTALL_DISABLE_LOW        1              0x1             
  * 0x0108[0]     OUT0_PDN                  0              0x0             
  * 0x0108[1]     OUT0_OE                   1              0x1             
@@ -1210,7 +1209,7 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * 0x0250[23:0]  R1_REG                    4              0x000004        
  * 0x0253[23:0]  R2_REG                    2              0x000002        
  * 0x0256[23:0]  R3_REG                    3              0x000003        
- * 0x025C[23:0]  R4_REG                    1              0x000001        
+ * 0x025C[23:0]  R4_REG                    2              0x000002        
  * 0x025F[23:0]  R5_REG                    4              0x000004        
  * 0x0262[23:0]  R6_REG                    4              0x000004        
  * 0x0268[23:0]  R7_REG                    4              0x000004        
@@ -1231,8 +1230,8 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * 0x0318[43:0]  N2_NUM                    76235669504    0x011C0000000   
  * 0x031E[31:0]  N2_DEN                    4026531840     0xF0000000      
  * 0x0322[0]     N2_UPDATE                 0              0x0             
- * 0x0323[43:0]  N3_NUM                    38117834752    0x008E0000000   
- * 0x0329[31:0]  N3_DEN                    2684354560     0xA0000000      
+ * 0x0323[43:0]  N3_NUM                    76235669504    0x011C0000000   
+ * 0x0329[31:0]  N3_DEN                    4026531840     0xF0000000      
  * 0x032D[0]     N3_UPDATE                 0              0x0             
  * 0x0338[1]     N_UPDATE                  0              0x0             
  * 0x0339[4:0]   N_FSTEP_MSK               0              0x00            
@@ -1375,10 +1374,10 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * 0x0642[17:0]  SLAB_OLC_FINE_ADJ_OVR     0              0x00000         
  * 0x0645[1]     SLAB_OLC_FORCE_FINE_ADJ   0              0x0             
  * 0x0702[4]     ADD_DIV256_PLLD           0              0x0             
- * 0x0709[5:0]   BW0_PLLD                  15             0x0F            
- * 0x070A[5:0]   BW1_PLLD                  28             0x1C            
- * 0x070B[5:0]   BW2_PLLD                  14             0x0E            
- * 0x070C[5:0]   BW3_PLLD                  13             0x0D            
+ * 0x0709[5:0]   BW0_PLLD                  16             0x10            
+ * 0x070A[5:0]   BW1_PLLD                  30             0x1E            
+ * 0x070B[5:0]   BW2_PLLD                  13             0x0D            
+ * 0x070C[5:0]   BW3_PLLD                  12             0x0C            
  * 0x070D[5:0]   BW4_PLLD                  1              0x01            
  * 0x070E[5:0]   BW5_PLLD                  63             0x3F            
  * 0x070F[5:0]   FAST_BW0_PLLD             20             0x14            
@@ -1387,7 +1386,7 @@ si5347ab_revb_register_t const si5347ab_revb_registers[SI5347AB_REVB_REG_CONFIG_
  * 0x0712[5:0]   FAST_BW3_PLLD             8              0x08            
  * 0x0713[5:0]   FAST_BW4_PLLD             1              0x01            
  * 0x0714[5:0]   FAST_BW5_PLLD             63             0x3F            
- * 0x0716[55:0]  M_NUM_PLLD                1116691496960  0x00010400000000
+ * 0x0716[55:0]  M_NUM_PLLD                837518622720   0x0000C300000000
  * 0x071D[31:0]  M_DEN_PLLD                2147483648     0x80000000      
  * 0x0722[3:0]   M_FRAC_MODE_PLLD          1              0x1             
  * 0x0722[4]     M_FRAC_EN_PLLD            0              0x0             
