@@ -1,0 +1,16 @@
+
+
+export PATH=$PATH:$PROJECT/linux-xlnx/build/scripts/dtc/
+
+make ARCH=arm O=build CROSS_COMPILE=arm-xilinx-linux-gnueabi- distclean
+make ARCH=arm O=build CROSS_COMPILE=arm-xilinx-linux-gnueabi- clean
+make ARCH=arm O=build CROSS_COMPILE=arm-xilinx-linux-gnueabi- zynq_ypacket2_defconfig
+make ARCH=arm O=build CROSS_COMPILE=arm-xilinx-linux-gnueabi-
+make ARCH=arm O=build CROSS_COMPILE=arm-xilinx-linux-gnueabi- env
+
+cp build/u-boot u-boot.elf
+
+
+bootgen -image boot.bif -w on -o i boot.bin 
+
+
