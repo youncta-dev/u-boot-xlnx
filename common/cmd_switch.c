@@ -29,30 +29,29 @@ DECLARE_GLOBAL_DATA_PTR;
 unsigned int get_counter(int port, int counter);
 unsigned short get_phy_reg(int port, int page, int reg);
 void set_phy_reg(int port, int page, int reg, uint16_t val);
+unsigned short get_switch_reg(int port, int reg);
+void set_switch_reg(int port, int reg, uint16_t val);
 
 
 static int do_switch_read(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
 
 	int rc = 0;
+    unsigned short data;
+	int	port, page, reg, counter;
+    uint16_t val;
 
-	if (argc < 4)
-		return CMD_RET_USAGE;
 
     if (strcmp(argv[1], "counter") == 0) 
     {
-	    int	port, counter;
+
 	    port = simple_strtoul(argv[2], NULL, 16);
 	    counter = simple_strtoul(argv[3], NULL, 16);
 	    printf("%d\n", get_counter(port, counter));
 
     }
-
-    
-    if (strcmp(argv[1], "phy") == 0) 
+    else if (strcmp(argv[1], "phy") == 0) 
     {
-	    int	port, page, reg;
-
 
 	    if (argc < 5)
 		    return CMD_RET_USAGE;
@@ -64,6 +63,13 @@ static int do_switch_read(cmd_tbl_t *cmdtp, int flag, int argc, char * const arg
 	    printf("%04x\n", get_phy_reg(port, page, reg));
             
     }
+    else {
+	    port = simple_strtoul(argv[1], NULL, 16);
+	    reg = simple_strtoul(argv[2], NULL, 16);
+
+        val = get_switch_reg(port, reg);
+        printf("%04x\n", val);
+    }
 
 	return (rc);
 }
@@ -72,12 +78,12 @@ static int do_switch_write(cmd_tbl_t *cmdtp, int flag, int argc, char * const ar
 {
 
     int rc = 0;
+    int	port, page, reg;
+    uint16_t val;
+
 
     if (strcmp(argv[1], "phy") == 0) 
     {
-	    int	port, page, reg;
-        uint16_t val;
-
 
 	    if (argc < 6)
 		    return CMD_RET_USAGE;
@@ -90,10 +96,16 @@ static int do_switch_write(cmd_tbl_t *cmdtp, int flag, int argc, char * const ar
 	    set_phy_reg(port, page, reg, val);
             
     }
+    else {
+	    port = simple_strtoul(argv[1], NULL, 16);
+	    reg = simple_strtoul(argv[2], NULL, 16);
+        val = simple_strtoul(argv[3], NULL, 16);
+
+        set_switch_reg(port, reg, val);
+    }
 
 	return (rc);
 }
-
 
 /**************************************************/
 U_BOOT_CMD(

@@ -3,6 +3,7 @@
 
 #include "ethconfig.h"
 
+const char *miiphy_get_current_dev(void);
 
 void toggle_bit(volatile uint32_t* reg, uint32_t mask) 
 {
@@ -11,6 +12,26 @@ void toggle_bit(volatile uint32_t* reg, uint32_t mask)
     *reg = *reg & ~mask;
     mdelay(100);
 }
+
+unsigned short get_switch_reg(int port, int reg)
+{
+    unsigned short data;
+    const char *devname = miiphy_get_current_dev();
+
+    miiphy_read(devname, port, reg, &data);
+
+    return data;
+
+}
+
+void set_switch_reg(int port, int reg, uint16_t val)
+{
+    const char *devname = miiphy_get_current_dev();
+
+    miiphy_write(devname, port, reg, val);
+
+}
+
 
 unsigned int get_counter(int port, int counter)
 {
