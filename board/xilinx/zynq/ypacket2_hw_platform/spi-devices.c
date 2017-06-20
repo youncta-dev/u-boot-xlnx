@@ -130,12 +130,28 @@ static void si5347_write_reg8(u16 addr, u8 val)
 
 int si5347_configure(int samples_clk)
 {
-    si5347ab_revb_register_t* registers = &si5347ab_revb_registers[0];
-    
-    printf("si5347 id: %02x %02x\n", si5347_read_reg8(0x0003), si5347_read_reg8(0x0002));
 
+    si5347ab_register_t* registers;
     int i = 0;
-    for (i = 0; i < SI5347AB_REVB_REG_CONFIG_NUM_REGS; i++)
+    int numRegs = 0;
+    u8 rev = si5347_read_reg8(0x0005);
+    printf("clock unit id: %02x%02x rev %02x ", si5347_read_reg8(0x0003), si5347_read_reg8(0x0002), si5347_read_reg8(0x0005));
+     
+
+    if (rev == 0x03)
+    {
+        registers = &si5347ab_revd_registers[0];  
+        numRegs = SI5347AB_REVD_REG_CONFIG_NUM_REGS;  
+    }
+    else
+    {
+        registers = &si5347ab_revb_registers[0];
+        numRegs = SI5347AB_REVB_REG_CONFIG_NUM_REGS;  
+    }
+
+
+
+    for (i = 0; i < numRegs; i++)
     {
         u8 reg;
         u16 addr = registers[i].address;
@@ -150,7 +166,9 @@ int si5347_configure(int samples_clk)
                 printf("%04x -> %02x wrong %02x\n", addr, registers[i].value, reg);
         }
     }
-    printf("si5347 configured\n");
+
+
+    printf(" configured\n");
     return 0;
 }
 
