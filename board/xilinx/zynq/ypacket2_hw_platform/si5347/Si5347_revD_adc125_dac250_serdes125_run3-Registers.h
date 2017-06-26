@@ -10,7 +10,7 @@
  * Design ID:                                          REV_D
  * Includes Pre/Post Download Control Register Writes: Yes
  * Created By:                                         ClockBuilder Pro v2.15 [2017-05-15]
- * Timestamp:                                          2017-06-26 16:05:05 GMT+02:00
+ * Timestamp:                                          2017-06-26 18:24:55 GMT+02:00
  *
  * A complete design report corresponding to this export is included at the end 
  * of this header file.
@@ -55,19 +55,19 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
 	{ 0x002D, 0x55 },
 	{ 0x002E, 0x3A },
 	{ 0x002F, 0x00 },
-	{ 0x0030, 0x3C },
+	{ 0x0030, 0x3B },
 	{ 0x0031, 0x00 },
-	{ 0x0032, 0x3C },
+	{ 0x0032, 0x3B },
 	{ 0x0033, 0x00 },
-	{ 0x0034, 0x3C },
+	{ 0x0034, 0x3B },
 	{ 0x0035, 0x00 },
 	{ 0x0036, 0x3A },
 	{ 0x0037, 0x00 },
-	{ 0x0038, 0x3C },
+	{ 0x0038, 0x3B },
 	{ 0x0039, 0x00 },
-	{ 0x003A, 0x3C },
+	{ 0x003A, 0x3B },
 	{ 0x003B, 0x00 },
-	{ 0x003C, 0x3C },
+	{ 0x003C, 0x3B },
 	{ 0x003D, 0x00 },
 	{ 0x003F, 0xFF },
 	{ 0x0040, 0x04 },
@@ -112,32 +112,32 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
 	{ 0x0068, 0x40 },
 	{ 0x0069, 0x01 },
 	{ 0x0092, 0x07 },
-	{ 0x0093, 0x88 },
-	{ 0x0094, 0x08 },
+	{ 0x0093, 0xAA },
+	{ 0x0094, 0x0A },
 	{ 0x0095, 0x00 },
-	{ 0x0096, 0x66 },
-	{ 0x0097, 0x06 },
-	{ 0x0098, 0x44 },
-	{ 0x0099, 0x04 },
+	{ 0x0096, 0x88 },
+	{ 0x0097, 0x08 },
+	{ 0x0098, 0x66 },
+	{ 0x0099, 0x06 },
 	{ 0x009A, 0x07 },
-	{ 0x009B, 0x44 },
-	{ 0x009C, 0x04 },
-	{ 0x009D, 0x00 },
-	{ 0x009E, 0x22 },
-	{ 0x009F, 0x02 },
-	{ 0x00A0, 0x00 },
-	{ 0x00A1, 0x00 },
+	{ 0x009B, 0x66 },
+	{ 0x009C, 0x06 },
+	{ 0x009D, 0x2A },
+	{ 0x009E, 0x44 },
+	{ 0x009F, 0x04 },
+	{ 0x00A0, 0x22 },
+	{ 0x00A1, 0x02 },
 	{ 0x00A2, 0x00 },
-	{ 0x00A4, 0x8B },
-	{ 0x00A5, 0x1D },
+	{ 0x00A4, 0xD8 },
+	{ 0x00A5, 0x64 },
 	{ 0x00A6, 0x00 },
 	{ 0x00A7, 0x00 },
-	{ 0x00A9, 0xAE },
-	{ 0x00AA, 0x1D },
+	{ 0x00A9, 0xA2 },
+	{ 0x00AA, 0x63 },
 	{ 0x00AB, 0x00 },
 	{ 0x00AC, 0x00 },
-	{ 0x00AE, 0xAE },
-	{ 0x00AF, 0x1D },
+	{ 0x00AE, 0xA2 },
+	{ 0x00AF, 0x63 },
 	{ 0x00B0, 0x00 },
 	{ 0x00B1, 0x00 },
 	{ 0x00B3, 0x00 },
@@ -145,16 +145,16 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
 	{ 0x00B5, 0x00 },
 	{ 0x00B6, 0x00 },
 	{ 0x00E5, 0x71 },
-	{ 0x00E6, 0x12 },
-	{ 0x00E7, 0x1A },
+	{ 0x00E6, 0x0A },
+	{ 0x00E7, 0x60 },
 	{ 0x00E8, 0x00 },
 	{ 0x00E9, 0x00 },
-	{ 0x00EA, 0x12 },
-	{ 0x00EB, 0x1A },
+	{ 0x00EA, 0x0A },
+	{ 0x00EB, 0x60 },
 	{ 0x00EC, 0x00 },
 	{ 0x00ED, 0x00 },
-	{ 0x00EE, 0x12 },
-	{ 0x00EF, 0x1A },
+	{ 0x00EE, 0x0A },
+	{ 0x00EF, 0x60 },
 	{ 0x00F0, 0x00 },
 	{ 0x00F1, 0x00 },
 	{ 0x00F2, 0x00 },
@@ -254,8 +254,8 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
 	{ 0x0235, 0x00 },
 	{ 0x0236, 0x00 },
 	{ 0x0237, 0x00 },
-	{ 0x0238, 0x00 },
-	{ 0x0239, 0x8E },
+	{ 0x0238, 0xC0 },
+	{ 0x0239, 0x8D },
 	{ 0x023A, 0x00 },
 	{ 0x023B, 0x00 },
 	{ 0x023C, 0x00 },
@@ -268,7 +268,7 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
 	{ 0x0244, 0x00 },
 	{ 0x0245, 0x00 },
 	{ 0x0246, 0x00 },
-	{ 0x024A, 0x02 },
+	{ 0x024A, 0x03 },
 	{ 0x024B, 0x00 },
 	{ 0x024C, 0x00 },
 	{ 0x0250, 0x02 },
@@ -283,13 +283,13 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
 	{ 0x025C, 0x02 },
 	{ 0x025D, 0x00 },
 	{ 0x025E, 0x00 },
-	{ 0x025F, 0x02 },
+	{ 0x025F, 0x03 },
 	{ 0x0260, 0x00 },
 	{ 0x0261, 0x00 },
-	{ 0x0262, 0x02 },
+	{ 0x0262, 0x01 },
 	{ 0x0263, 0x00 },
 	{ 0x0264, 0x00 },
-	{ 0x0268, 0x02 },
+	{ 0x0268, 0x03 },
 	{ 0x0269, 0x00 },
 	{ 0x026A, 0x00 },
 	{ 0x026B, 0x52 },
@@ -300,31 +300,31 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
 	{ 0x0270, 0x00 },
 	{ 0x0271, 0x00 },
 	{ 0x0272, 0x00 },
-	{ 0x0294, 0xCC },
+	{ 0x0294, 0xCD },
 	{ 0x0295, 0x8C },
-	{ 0x0296, 0x00 },
+	{ 0x0296, 0x07 },
 	{ 0x0297, 0x07 },
 	{ 0x0299, 0x07 },
-	{ 0x029A, 0x0A },
-	{ 0x029B, 0x07 },
+	{ 0x029A, 0xFA },
+	{ 0x029B, 0x01 },
 	{ 0x029C, 0x00 },
-	{ 0x029D, 0x0A },
-	{ 0x029E, 0x07 },
+	{ 0x029D, 0xFA },
+	{ 0x029E, 0x01 },
 	{ 0x029F, 0x00 },
-	{ 0x02A0, 0x0A },
-	{ 0x02A1, 0x07 },
+	{ 0x02A0, 0xFA },
+	{ 0x02A1, 0x01 },
 	{ 0x02A2, 0x00 },
 	{ 0x02A3, 0x00 },
 	{ 0x02A4, 0x00 },
 	{ 0x02A5, 0x00 },
-	{ 0x02A6, 0x99 },
-	{ 0x02A7, 0x09 },
+	{ 0x02A6, 0xCC },
+	{ 0x02A7, 0x04 },
 	{ 0x02A8, 0x00 },
-	{ 0x02A9, 0x99 },
-	{ 0x02AA, 0x09 },
+	{ 0x02A9, 0xCC },
+	{ 0x02AA, 0x04 },
 	{ 0x02AB, 0x00 },
-	{ 0x02AC, 0x99 },
-	{ 0x02AD, 0x09 },
+	{ 0x02AC, 0xCC },
+	{ 0x02AD, 0x04 },
 	{ 0x02AE, 0x00 },
 	{ 0x02AF, 0x00 },
 	{ 0x02B0, 0x00 },
@@ -333,46 +333,46 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
 	{ 0x0302, 0x00 },
 	{ 0x0303, 0x00 },
 	{ 0x0304, 0x00 },
-	{ 0x0305, 0xC0 },
-	{ 0x0306, 0x11 },
+	{ 0x0305, 0xDC },
+	{ 0x0306, 0x08 },
 	{ 0x0307, 0x00 },
 	{ 0x0308, 0x00 },
 	{ 0x0309, 0x00 },
 	{ 0x030A, 0x00 },
-	{ 0x030B, 0xF0 },
+	{ 0x030B, 0xA0 },
 	{ 0x030C, 0x00 },
 	{ 0x030D, 0x00 },
 	{ 0x030E, 0x00 },
 	{ 0x030F, 0x00 },
-	{ 0x0310, 0xC0 },
-	{ 0x0311, 0x11 },
+	{ 0x0310, 0xD0 },
+	{ 0x0311, 0x0B },
 	{ 0x0312, 0x00 },
 	{ 0x0313, 0x00 },
 	{ 0x0314, 0x00 },
 	{ 0x0315, 0x00 },
-	{ 0x0316, 0xF0 },
+	{ 0x0316, 0xA0 },
 	{ 0x0317, 0x00 },
 	{ 0x0318, 0x00 },
 	{ 0x0319, 0x00 },
 	{ 0x031A, 0x00 },
-	{ 0x031B, 0xC0 },
-	{ 0x031C, 0x11 },
+	{ 0x031B, 0xD0 },
+	{ 0x031C, 0x0B },
 	{ 0x031D, 0x00 },
 	{ 0x031E, 0x00 },
 	{ 0x031F, 0x00 },
 	{ 0x0320, 0x00 },
-	{ 0x0321, 0xF0 },
+	{ 0x0321, 0xA0 },
 	{ 0x0322, 0x00 },
 	{ 0x0323, 0x00 },
 	{ 0x0324, 0x00 },
 	{ 0x0325, 0x00 },
-	{ 0x0326, 0xC0 },
-	{ 0x0327, 0x11 },
+	{ 0x0326, 0xD0 },
+	{ 0x0327, 0x0B },
 	{ 0x0328, 0x00 },
 	{ 0x0329, 0x00 },
 	{ 0x032A, 0x00 },
 	{ 0x032B, 0x00 },
-	{ 0x032C, 0xF0 },
+	{ 0x032C, 0xA0 },
 	{ 0x032D, 0x00 },
 	{ 0x0338, 0x00 },
 	{ 0x0339, 0x00 },
@@ -401,10 +401,10 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
 	{ 0x0351, 0x00 },
 	{ 0x0352, 0x00 },
 	{ 0x0402, 0x01 },
-	{ 0x0408, 0x10 },
-	{ 0x0409, 0x1E },
-	{ 0x040A, 0x0D },
-	{ 0x040B, 0x0C },
+	{ 0x0408, 0x0F },
+	{ 0x0409, 0x1C },
+	{ 0x040A, 0x0E },
+	{ 0x040B, 0x0D },
 	{ 0x040C, 0x01 },
 	{ 0x040D, 0x3F },
 	{ 0x040E, 0x14 },
@@ -417,7 +417,7 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
 	{ 0x0416, 0x00 },
 	{ 0x0417, 0x00 },
 	{ 0x0418, 0x00 },
-	{ 0x0419, 0xBD },
+	{ 0x0419, 0xFC },
 	{ 0x041A, 0x00 },
 	{ 0x041B, 0x00 },
 	{ 0x041C, 0x00 },
@@ -451,7 +451,7 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
 	{ 0x043A, 0x02 },
 	{ 0x043B, 0x03 },
 	{ 0x043C, 0x00 },
-	{ 0x043D, 0x12 },
+	{ 0x043D, 0x13 },
 	{ 0x043E, 0x06 },
 	{ 0x0442, 0x00 },
 	{ 0x0443, 0x00 },
@@ -460,10 +460,10 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
 	{ 0x0489, 0x0D },
 	{ 0x048A, 0x00 },
 	{ 0x049B, 0xD8 },
-	{ 0x049D, 0x10 },
-	{ 0x049E, 0x20 },
-	{ 0x049F, 0x0D },
-	{ 0x04A0, 0x0C },
+	{ 0x049D, 0x0F },
+	{ 0x049E, 0x1E },
+	{ 0x049F, 0x0E },
+	{ 0x04A0, 0x0D },
 	{ 0x04A1, 0x01 },
 	{ 0x04A2, 0x3F },
 	{ 0x04A6, 0x0B },
@@ -800,7 +800,7 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * Part:         Si5347 Rev D
  * Design ID:    REV_D
  * Created By:   ClockBuilder Pro v2.15 [2017-05-15]
- * Timestamp:    2017-06-26 16:05:04 GMT+02:00
+ * Timestamp:    2017-06-26 18:24:55 GMT+02:00
  * 
  * Design Rule Check
  * =================
@@ -808,9 +808,9 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * - No errors
  * 
  * Warnings:
- * - DSPLL A: loop bandwidth 40 Hz or lower (39.7 Hz) with XTAL input on XA/XB [1]
- * - DSPLL B: loop bandwidth 40 Hz or lower (38.2 Hz) with XTAL input on XA/XB [1]
- * - DSPLL C: loop bandwidth 40 Hz or lower (38.2 Hz) with XTAL input on XA/XB [1]
+ * - DSPLL A: loop bandwidth 40 Hz or lower (28.7 Hz) with XTAL input on XA/XB [1]
+ * - DSPLL B: loop bandwidth 40 Hz or lower (38.3 Hz) with XTAL input on XA/XB [1]
+ * - DSPLL C: loop bandwidth 40 Hz or lower (38.3 Hz) with XTAL input on XA/XB [1]
  * - OUT2: For the best signal integrity, Silicon Labs strongly recommends selecting the lowest LVCMOS output impedance (31 ?) and then choosing the proper external source resistor to produce the best signal shape at the end of the signal trace
  * - You have selected CMOS output. Please review AN862 "Optimizing Si534x Jitter Performance in Next Generation Internet Infrastructure Systems" to ensure your configuration meets your jitter requirements
  * 
@@ -819,7 +819,7 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * 
  * Device Grade
  * ============
- * Maximum Output Frequency: 125 MHz
+ * Maximum Output Frequency: 250 MHz
  * Frequency Synthesis Mode: Fractional
  * Frequency Plan Grade:     B
  * Minimum Base OPN:         Si5347B*
@@ -879,7 +879,7 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  *    OUT5: 125 MHz
  *          Enabled, LVDS 1.8 V
  *          DSPLL A
- *    OUT6: 125 MHz
+ *    OUT6: 250 MHz
  *          Enabled, LVDS 1.8 V
  *          DSPLL A
  *    OUT7: 125 MHz
@@ -888,28 +888,28 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * 
  * Frequency Plan
  * ==============
- * Fvco = 14.2 GHz [ 14 + 1/5 GHz ]
- * MXAXB = 284
+ * Fvco = 14.175 GHz [ 14 + 7/40 GHz ]
+ * MXAXB = 283.5 [ 283 + 1/2 ]
  * 
  * DSPLL A:
  *    Fpfd = 1.9841269841269841... MHz [ 1 + 62/63 MHz ]
- *    Fdco = 750 MHz
+ *    Fdco = 1 GHz
  *    I/O Delay not enabled
- *    MA = 378
- *    N0 = 18.9333333333333333... [ 18 + 14/15 ]
+ *    MA = 504
+ *    N0 = 14.175 [ 14 + 7/40 ]
  *    Nominal Bandwidth:
  *      Desired: 40.000 Hz
- *      Actual:  39.717 Hz
+ *      Actual:  28.686 Hz
  *      Coefficients:
- *         BW0:  16
- *         BW1:  30
- *         BW2:  13
- *         BW3:  12
+ *         BW0:  15
+ *         BW1:  28
+ *         BW2:  14
+ *         BW3:  13
  *         BW4:  1
  *         BW5:  63
  *    Fastlock Bandwidth:
  *      Desired: 1.000 kHz
- *      Actual:  636.097 Hz
+ *      Actual:  919.208 Hz
  *      Coefficients:
  *         BW0:  20
  *         BW1:  40
@@ -919,12 +919,12 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  *         BW5:  63
  *    Holdover Bandwidth:
  *      Desired: 40.000 Hz
- *      Actual:  39.717 Hz
+ *      Actual:  28.686 Hz
  *      Coefficients:
- *         BW0:  16
- *         BW1:  32
- *         BW2:  13
- *         BW3:  12
+ *         BW0:  15
+ *         BW1:  30
+ *         BW2:  14
+ *         BW3:  13
  *         BW4:  1
  *         BW5:  63
  * DSPLL B:
@@ -932,10 +932,10 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  *    Fdco = 750 MHz
  *    I/O Delay not enabled
  *    MB = 390
- *    N1 = 18.9333333333333333... [ 18 + 14/15 ]
+ *    N1 = 18.9 [ 18 + 9/10 ]
  *    Nominal Bandwidth:
  *      Desired: 40.000 Hz
- *      Actual:  38.234 Hz
+ *      Actual:  38.330 Hz
  *      Coefficients:
  *         BW0:  16
  *         BW1:  30
@@ -945,7 +945,7 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  *         BW5:  63
  *    Fastlock Bandwidth:
  *      Desired: 1.000 kHz
- *      Actual:  612.348 Hz
+ *      Actual:  613.891 Hz
  *      Coefficients:
  *         BW0:  20
  *         BW1:  40
@@ -955,7 +955,7 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  *         BW5:  63
  *    Holdover Bandwidth:
  *      Desired: 40.000 Hz
- *      Actual:  38.234 Hz
+ *      Actual:  38.330 Hz
  *      Coefficients:
  *         BW0:  16
  *         BW1:  32
@@ -968,10 +968,10 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  *    Fdco = 750 MHz
  *    I/O Delay not enabled
  *    MC = 390
- *    N2 = 18.9333333333333333... [ 18 + 14/15 ]
+ *    N2 = 18.9 [ 18 + 9/10 ]
  *    Nominal Bandwidth:
  *      Desired: 40.000 Hz
- *      Actual:  38.234 Hz
+ *      Actual:  38.330 Hz
  *      Coefficients:
  *         BW0:  16
  *         BW1:  30
@@ -981,7 +981,7 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  *         BW5:  63
  *    Fastlock Bandwidth:
  *      Desired: 1.000 kHz
- *      Actual:  612.348 Hz
+ *      Actual:  613.891 Hz
  *      Coefficients:
  *         BW0:  20
  *         BW1:  40
@@ -991,7 +991,7 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  *         BW5:  63
  *    Holdover Bandwidth:
  *      Desired: 40.000 Hz
- *      Actual:  38.234 Hz
+ *      Actual:  38.330 Hz
  *      Coefficients:
  *         BW0:  16
  *         BW1:  32
@@ -1011,14 +1011,14 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  *    Pxaxb = 1
  * 
  * R dividers:
- *    R0 = 6
+ *    R0 = 8
  *    R1 = 6
  *    R2 = 30
  *    R3 = 6
  *    R4 = 6
- *    R5 = 6
- *    R6 = 6
- *    R7 = 6
+ *    R5 = 8
+ *    R6 = 4
+ *    R7 = 8
  * 
  * Dividers listed above show effective values. These values are translated to register settings by ClockBuilder Pro. For the actual register values, see below. Refer to the Family Reference Manual for information on registers related to frequency plan.
  * 
@@ -1041,11 +1041,11 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * Ta:       70 °C
  * Airflow:  None
  * 
- * Total Power: 1.125 W, On Chip Power: 1.084 W, Tj: 94 °C
+ * Total Power: 1.138 W, On Chip Power: 1.096 W, Tj: 94 °C
  * 
  *         Frequency  Format              Voltage   Current     Power
  *         ---------  -----------------  --------  --------  --------
- * VDD                                      1.8 V  280.1 mA    504 mW
+ * VDD                                      1.8 V  286.4 mA    515 mW
  * VDDA                                     3.3 V  120.4 mA    397 mW
  * VDDO0     125 MHz  LVDS                  1.8 V   15.7 mA     28 mW
  * VDDO1     125 MHz  LVDS                  1.8 V   15.7 mA     28 mW
@@ -1053,10 +1053,10 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * VDDO3     125 MHz  LVDS                  1.8 V   15.7 mA     28 mW
  * VDDO4     125 MHz  LVDS                  1.8 V   15.7 mA     28 mW
  * VDDO5     125 MHz  LVDS                  1.8 V   15.7 mA     28 mW
- * VDDO6     125 MHz  LVDS                  1.8 V   15.7 mA     28 mW
+ * VDDO6     250 MHz  LVDS                  1.8 V   16.6 mA     30 mW
  * VDDO7     125 MHz  LVDS                  1.8 V   15.7 mA     28 mW
  *                                                 --------  --------
- *                                          Total  524.9 mA   1.125 W
+ *                                          Total  532.0 mA   1.138 W
  * 
  * Note:
  * 
@@ -1105,13 +1105,13 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * 0x002D[5:4]   LOS2_VAL_TIME               1              0x1             
  * 0x002D[7:6]   LOS3_VAL_TIME               1              0x1             
  * 0x002E[15:0]  LOS0_TRG_THR                58             0x003A          
- * 0x0030[15:0]  LOS1_TRG_THR                60             0x003C          
- * 0x0032[15:0]  LOS2_TRG_THR                60             0x003C          
- * 0x0034[15:0]  LOS3_TRG_THR                60             0x003C          
+ * 0x0030[15:0]  LOS1_TRG_THR                59             0x003B          
+ * 0x0032[15:0]  LOS2_TRG_THR                59             0x003B          
+ * 0x0034[15:0]  LOS3_TRG_THR                59             0x003B          
  * 0x0036[15:0]  LOS0_CLR_THR                58             0x003A          
- * 0x0038[15:0]  LOS1_CLR_THR                60             0x003C          
- * 0x003A[15:0]  LOS2_CLR_THR                60             0x003C          
- * 0x003C[15:0]  LOS3_CLR_THR                60             0x003C          
+ * 0x0038[15:0]  LOS1_CLR_THR                59             0x003B          
+ * 0x003A[15:0]  LOS2_CLR_THR                59             0x003B          
+ * 0x003C[15:0]  LOS3_CLR_THR                59             0x003B          
  * 0x003F[3:0]   OOF_EN                      15             0xF             
  * 0x003F[7:4]   FAST_OOF_EN                 15             0xF             
  * 0x0040[2:0]   OOF_REF_SEL                 4              0x4             
@@ -1152,57 +1152,57 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * 0x0092[1]     LOL_FST_EN_PLLB             1              0x1             
  * 0x0092[2]     LOL_FST_EN_PLLC             1              0x1             
  * 0x0092[3]     LOL_FST_EN_PLLD             0              0x0             
- * 0x0093[3:0]   LOL_FST_DETWIN_SEL_PLLA     8              0x8             
- * 0x0093[7:4]   LOL_FST_DETWIN_SEL_PLLB     8              0x8             
- * 0x0094[3:0]   LOL_FST_DETWIN_SEL_PLLC     8              0x8             
+ * 0x0093[3:0]   LOL_FST_DETWIN_SEL_PLLA     10             0xA             
+ * 0x0093[7:4]   LOL_FST_DETWIN_SEL_PLLB     10             0xA             
+ * 0x0094[3:0]   LOL_FST_DETWIN_SEL_PLLC     10             0xA             
  * 0x0094[7:4]   LOL_FST_DETWIN_SEL_PLLD     0              0x0             
  * 0x0095[1:0]   LOL_FST_VALWIN_SEL_PLLA     0              0x0             
  * 0x0095[3:2]   LOL_FST_VALWIN_SEL_PLLB     0              0x0             
  * 0x0095[5:4]   LOL_FST_VALWIN_SEL_PLLC     0              0x0             
  * 0x0095[7:6]   LOL_FST_VALWIN_SEL_PLLD     0              0x0             
- * 0x0096[3:0]   LOL_FST_SET_THR_SEL_PLLA    6              0x6             
- * 0x0096[7:4]   LOL_FST_SET_THR_SEL_PLLB    6              0x6             
- * 0x0097[3:0]   LOL_FST_SET_THR_SEL_PLLC    6              0x6             
+ * 0x0096[3:0]   LOL_FST_SET_THR_SEL_PLLA    8              0x8             
+ * 0x0096[7:4]   LOL_FST_SET_THR_SEL_PLLB    8              0x8             
+ * 0x0097[3:0]   LOL_FST_SET_THR_SEL_PLLC    8              0x8             
  * 0x0097[7:4]   LOL_FST_SET_THR_SEL_PLLD    0              0x0             
- * 0x0098[3:0]   LOL_FST_CLR_THR_SEL_PLLA    4              0x4             
- * 0x0098[7:4]   LOL_FST_CLR_THR_SEL_PLLB    4              0x4             
- * 0x0099[3:0]   LOL_FST_CLR_THR_SEL_PLLC    4              0x4             
+ * 0x0098[3:0]   LOL_FST_CLR_THR_SEL_PLLA    6              0x6             
+ * 0x0098[7:4]   LOL_FST_CLR_THR_SEL_PLLB    6              0x6             
+ * 0x0099[3:0]   LOL_FST_CLR_THR_SEL_PLLC    6              0x6             
  * 0x0099[7:4]   LOL_FST_CLR_THR_SEL_PLLD    0              0x0             
  * 0x009A[0]     LOL_SLOW_EN_PLLA            1              0x1             
  * 0x009A[1]     LOL_SLOW_EN_PLLB            1              0x1             
  * 0x009A[2]     LOL_SLOW_EN_PLLC            1              0x1             
  * 0x009A[3]     LOL_SLOW_EN_PLLD            0              0x0             
- * 0x009B[3:0]   LOL_SLW_DETWIN_SEL_PLLA     4              0x4             
- * 0x009B[7:4]   LOL_SLW_DETWIN_SEL_PLLB     4              0x4             
- * 0x009C[3:0]   LOL_SLW_DETWIN_SEL_PLLC     4              0x4             
+ * 0x009B[3:0]   LOL_SLW_DETWIN_SEL_PLLA     6              0x6             
+ * 0x009B[7:4]   LOL_SLW_DETWIN_SEL_PLLB     6              0x6             
+ * 0x009C[3:0]   LOL_SLW_DETWIN_SEL_PLLC     6              0x6             
  * 0x009C[7:4]   LOL_SLW_DETWIN_SEL_PLLD     0              0x0             
- * 0x009D[1:0]   LOL_SLW_VALWIN_SEL_PLLA     0              0x0             
- * 0x009D[3:2]   LOL_SLW_VALWIN_SEL_PLLB     0              0x0             
- * 0x009D[5:4]   LOL_SLW_VALWIN_SEL_PLLC     0              0x0             
+ * 0x009D[1:0]   LOL_SLW_VALWIN_SEL_PLLA     2              0x2             
+ * 0x009D[3:2]   LOL_SLW_VALWIN_SEL_PLLB     2              0x2             
+ * 0x009D[5:4]   LOL_SLW_VALWIN_SEL_PLLC     2              0x2             
  * 0x009D[7:6]   LOL_SLW_VALWIN_SEL_PLLD     0              0x0             
- * 0x009E[3:0]   LOL_SLW_SET_THR_PLLA        2              0x2             
- * 0x009E[7:4]   LOL_SLW_SET_THR_PLLB        2              0x2             
- * 0x009F[3:0]   LOL_SLW_SET_THR_PLLC        2              0x2             
+ * 0x009E[3:0]   LOL_SLW_SET_THR_PLLA        4              0x4             
+ * 0x009E[7:4]   LOL_SLW_SET_THR_PLLB        4              0x4             
+ * 0x009F[3:0]   LOL_SLW_SET_THR_PLLC        4              0x4             
  * 0x009F[7:4]   LOL_SLW_SET_THR_PLLD        0              0x0             
- * 0x00A0[3:0]   LOL_SLW_CLR_THR_PLLA        0              0x0             
- * 0x00A0[7:4]   LOL_SLW_CLR_THR_PLLB        0              0x0             
- * 0x00A1[3:0]   LOL_SLW_CLR_THR_PLLC        0              0x0             
+ * 0x00A0[3:0]   LOL_SLW_CLR_THR_PLLA        2              0x2             
+ * 0x00A0[7:4]   LOL_SLW_CLR_THR_PLLB        2              0x2             
+ * 0x00A1[3:0]   LOL_SLW_CLR_THR_PLLC        2              0x2             
  * 0x00A1[7:4]   LOL_SLW_CLR_THR_PLLD        0              0x0             
  * 0x00A2[0]     LOL_TIMER_EN_PLLA           0              0x0             
  * 0x00A2[1]     LOL_TIMER_EN_PLLB           0              0x0             
  * 0x00A2[2]     LOL_TIMER_EN_PLLC           0              0x0             
  * 0x00A2[3]     LOL_TIMER_EN_PLLD           0              0x0             
- * 0x00A4[28:0]  LOL_CLR_DELAY_DIV256_PLLA   7563           0x00001D8B      
- * 0x00A9[28:0]  LOL_CLR_DELAY_DIV256_PLLB   7598           0x00001DAE      
- * 0x00AE[28:0]  LOL_CLR_DELAY_DIV256_PLLC   7598           0x00001DAE      
+ * 0x00A4[28:0]  LOL_CLR_DELAY_DIV256_PLLA   25816          0x000064D8      
+ * 0x00A9[28:0]  LOL_CLR_DELAY_DIV256_PLLB   25506          0x000063A2      
+ * 0x00AE[28:0]  LOL_CLR_DELAY_DIV256_PLLC   25506          0x000063A2      
  * 0x00B3[28:0]  LOL_CLR_DELAY_DIV256_PLLD   0              0x00000000      
  * 0x00E5[4]     FASTLOCK_EXTEND_EN_PLLA     1              0x1             
  * 0x00E5[5]     FASTLOCK_EXTEND_EN_PLLB     1              0x1             
  * 0x00E5[6]     FASTLOCK_EXTEND_EN_PLLC     1              0x1             
  * 0x00E5[7]     FASTLOCK_EXTEND_EN_PLLD     0              0x0             
- * 0x00E6[28:0]  FASTLOCK_EXTEND_PLLA        6674           0x00001A12      
- * 0x00EA[28:0]  FASTLOCK_EXTEND_PLLB        6674           0x00001A12      
- * 0x00EE[28:0]  FASTLOCK_EXTEND_PLLC        6674           0x00001A12      
+ * 0x00E6[28:0]  FASTLOCK_EXTEND_PLLA        24586          0x0000600A      
+ * 0x00EA[28:0]  FASTLOCK_EXTEND_PLLB        24586          0x0000600A      
+ * 0x00EE[28:0]  FASTLOCK_EXTEND_PLLC        24586          0x0000600A      
  * 0x00F2[28:0]  FASTLOCK_EXTEND_PLLD        0              0x00000000      
  * 0x0102[0]     OUTALL_DISABLE_LOW          1              0x1             
  * 0x0108[0]     OUT0_PDN                    0              0x0             
@@ -1350,19 +1350,19 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * 0x0233[4]     P2_FRACN_EN                 0              0x0             
  * 0x0234[3:0]   P3_FRACN_MODE               11             0xB             
  * 0x0234[4]     P3_FRACN_EN                 0              0x0             
- * 0x0235[43:0]  MXAXB_NUM                   609885356032   0x08E00000000   
+ * 0x0235[43:0]  MXAXB_NUM                   608811614208   0x08DC0000000   
  * 0x023B[31:0]  MXAXB_DEN                   2147483648     0x80000000      
  * 0x0240[0]     MXAXB_FSTEP_MSK             0              0x0             
  * 0x0240[1]     MXAXB_FSTEP_DEN             0              0x0             
  * 0x0241[43:0]  MXAXB_FSTEPW                0              0x00000000000   
- * 0x024A[23:0]  R0_REG                      2              0x000002        
+ * 0x024A[23:0]  R0_REG                      3              0x000003        
  * 0x0250[23:0]  R1_REG                      2              0x000002        
  * 0x0253[23:0]  R2_REG                      14             0x00000E        
  * 0x0256[23:0]  R3_REG                      2              0x000002        
  * 0x025C[23:0]  R4_REG                      2              0x000002        
- * 0x025F[23:0]  R5_REG                      2              0x000002        
- * 0x0262[23:0]  R6_REG                      2              0x000002        
- * 0x0268[23:0]  R7_REG                      2              0x000002        
+ * 0x025F[23:0]  R5_REG                      3              0x000003        
+ * 0x0262[23:0]  R6_REG                      1              0x000001        
+ * 0x0268[23:0]  R7_REG                      3              0x000003        
  * 0x026B[7:0]   DESIGN_ID0                  82             0x52            
  * 0x026C[7:0]   DESIGN_ID1                  69             0x45            
  * 0x026D[7:0]   DESIGN_ID2                  86             0x56            
@@ -1371,13 +1371,13 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * 0x0270[7:0]   DESIGN_ID5                  0              0x00            
  * 0x0271[7:0]   DESIGN_ID6                  0              0x00            
  * 0x0272[7:0]   DESIGN_ID7                  0              0x00            
- * 0x0294[3:0]   FASTLOCK_EXTEND_SCL_PLLA    12             0xC             
+ * 0x0294[3:0]   FASTLOCK_EXTEND_SCL_PLLA    13             0xD             
  * 0x0294[7:4]   FASTLOCK_EXTEND_SCL_PLLB    12             0xC             
  * 0x0295[3:0]   FASTLOCK_EXTEND_SCL_PLLC    12             0xC             
  * 0x0295[7:4]   FASTLOCK_EXTEND_SCL_PLLD    8              0x8             
- * 0x0296[0]     LOL_SLW_VALWIN_SELX_PLLA    0              0x0             
- * 0x0296[1]     LOL_SLW_VALWIN_SELX_PLLB    0              0x0             
- * 0x0296[2]     LOL_SLW_VALWIN_SELX_PLLC    0              0x0             
+ * 0x0296[0]     LOL_SLW_VALWIN_SELX_PLLA    1              0x1             
+ * 0x0296[1]     LOL_SLW_VALWIN_SELX_PLLB    1              0x1             
+ * 0x0296[2]     LOL_SLW_VALWIN_SELX_PLLC    1              0x1             
  * 0x0296[3]     LOL_SLW_VALWIN_SELX_PLLD    0              0x0             
  * 0x0297[0]     FASTLOCK_DLY_ONSW_EN_PLLA   1              0x1             
  * 0x0297[1]     FASTLOCK_DLY_ONSW_EN_PLLB   1              0x1             
@@ -1387,29 +1387,29 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * 0x0299[1]     FASTLOCK_DLY_ONLOL_EN_PLLB  1              0x1             
  * 0x0299[2]     FASTLOCK_DLY_ONLOL_EN_PLLC  1              0x1             
  * 0x0299[3]     FASTLOCK_DLY_ONLOL_EN_PLLD  0              0x0             
- * 0x029A[19:0]  FASTLOCK_DLY_ONLOL_PLLA     1802           0x0070A         
- * 0x029D[19:0]  FASTLOCK_DLY_ONLOL_PLLB     1802           0x0070A         
- * 0x02A0[19:0]  FASTLOCK_DLY_ONLOL_PLLC     1802           0x0070A         
+ * 0x029A[19:0]  FASTLOCK_DLY_ONLOL_PLLA     506            0x001FA         
+ * 0x029D[19:0]  FASTLOCK_DLY_ONLOL_PLLB     506            0x001FA         
+ * 0x02A0[19:0]  FASTLOCK_DLY_ONLOL_PLLC     506            0x001FA         
  * 0x02A3[19:0]  FASTLOCK_DLY_ONLOL_PLLD     0              0x00000         
- * 0x02A6[19:0]  FASTLOCK_DLY_ONSW_PLLA      2457           0x00999         
- * 0x02A9[19:0]  FASTLOCK_DLY_ONSW_PLLB      2457           0x00999         
- * 0x02AC[19:0]  FASTLOCK_DLY_ONSW_PLLC      2457           0x00999         
+ * 0x02A6[19:0]  FASTLOCK_DLY_ONSW_PLLA      1228           0x004CC         
+ * 0x02A9[19:0]  FASTLOCK_DLY_ONSW_PLLB      1228           0x004CC         
+ * 0x02AC[19:0]  FASTLOCK_DLY_ONSW_PLLC      1228           0x004CC         
  * 0x02AF[19:0]  FASTLOCK_DLY_ONSW_PLLD      0              0x00000         
  * 0x02B7[1:0]   LOL_NOSIG_TIME_PLLA         3              0x3             
  * 0x02B7[3:2]   LOL_NOSIG_TIME_PLLB         3              0x3             
  * 0x02B7[5:4]   LOL_NOSIG_TIME_PLLC         3              0x3             
  * 0x02B7[7:6]   LOL_NOSIG_TIME_PLLD         3              0x3             
- * 0x0302[43:0]  N0_NUM                      76235669504    0x011C0000000   
- * 0x0308[31:0]  N0_DEN                      4026531840     0xF0000000      
+ * 0x0302[43:0]  N0_NUM                      38050725888    0x008DC000000   
+ * 0x0308[31:0]  N0_DEN                      2684354560     0xA0000000      
  * 0x030C[0]     N0_UPDATE                   0              0x0             
- * 0x030D[43:0]  N1_NUM                      76235669504    0x011C0000000   
- * 0x0313[31:0]  N1_DEN                      4026531840     0xF0000000      
+ * 0x030D[43:0]  N1_NUM                      50734301184    0x00BD0000000   
+ * 0x0313[31:0]  N1_DEN                      2684354560     0xA0000000      
  * 0x0317[0]     N1_UPDATE                   0              0x0             
- * 0x0318[43:0]  N2_NUM                      76235669504    0x011C0000000   
- * 0x031E[31:0]  N2_DEN                      4026531840     0xF0000000      
+ * 0x0318[43:0]  N2_NUM                      50734301184    0x00BD0000000   
+ * 0x031E[31:0]  N2_DEN                      2684354560     0xA0000000      
  * 0x0322[0]     N2_UPDATE                   0              0x0             
- * 0x0323[43:0]  N3_NUM                      76235669504    0x011C0000000   
- * 0x0329[31:0]  N3_DEN                      4026531840     0xF0000000      
+ * 0x0323[43:0]  N3_NUM                      50734301184    0x00BD0000000   
+ * 0x0329[31:0]  N3_DEN                      2684354560     0xA0000000      
  * 0x032D[0]     N3_UPDATE                   0              0x0             
  * 0x0338[1]     N_UPDATE                    0              0x0             
  * 0x0339[4:0]   N_FSTEP_MSK                 0              0x00            
@@ -1422,10 +1422,10 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * 0x0402[2]     M_RST_PLLA                  0              0x0             
  * 0x0402[3]     PFD_CLKM_STOP_PLLA          0              0x0             
  * 0x0402[4]     ADD_DIV256_PLLA             0              0x0             
- * 0x0408[5:0]   BW0_PLLA                    16             0x10            
- * 0x0409[5:0]   BW1_PLLA                    30             0x1E            
- * 0x040A[5:0]   BW2_PLLA                    13             0x0D            
- * 0x040B[5:0]   BW3_PLLA                    12             0x0C            
+ * 0x0408[5:0]   BW0_PLLA                    15             0x0F            
+ * 0x0409[5:0]   BW1_PLLA                    28             0x1C            
+ * 0x040A[5:0]   BW2_PLLA                    14             0x0E            
+ * 0x040B[5:0]   BW3_PLLA                    13             0x0D            
  * 0x040C[5:0]   BW4_PLLA                    1              0x01            
  * 0x040D[5:0]   BW5_PLLA                    63             0x3F            
  * 0x040E[5:0]   FASTLOCK_BW0_PLLA           20             0x14            
@@ -1434,7 +1434,7 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * 0x0411[5:0]   FASTLOCK_BW3_PLLA           8              0x08            
  * 0x0412[5:0]   FASTLOCK_BW4_PLLA           1              0x01            
  * 0x0413[5:0]   FASTLOCK_BW5_PLLA           63             0x3F            
- * 0x0415[55:0]  M_NUM_PLLA                  811748818944   0x0000BD00000000
+ * 0x0415[55:0]  M_NUM_PLLA                  1082331758592  0x0000FC00000000
  * 0x041C[31:0]  M_DEN_PLLA                  2147483648     0x80000000      
  * 0x0421[3:0]   M_FRAC_MODE_PLLA            11             0xB             
  * 0x0421[4]     M_FRAC_EN_PLLA              0              0x0             
@@ -1465,7 +1465,7 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * 0x043A[1:0]   HSW_MODE_PLLA               2              0x2             
  * 0x043A[3:2]   HSW_PHMEAS_CTRL_PLLA        0              0x0             
  * 0x043B[9:0]   HSW_PHMEAS_THR_PLLA         3              0x003           
- * 0x043D[4:0]   HSW_COARSE_PM_LEN_PLLA      18             0x12            
+ * 0x043D[4:0]   HSW_COARSE_PM_LEN_PLLA      19             0x13            
  * 0x043E[4:0]   HSW_COARSE_PM_DLY_PLLA      6              0x06            
  * 0x0442[17:0]  FINE_ADJ_OVR_PLLA           0              0x00000         
  * 0x0445[1]     FORCE_FINE_ADJ_PLLA         0              0x0             
@@ -1473,10 +1473,10 @@ si5347ab_revd_register_t const si5347ab_revd_registers[SI5347AB_REVD_REG_CONFIG_
  * 0x049B[2]     HO_SKIP_PHASE_PLLA          0              0x0             
  * 0x049B[6]     HOLDEXIT_BW_SEL0_PLLA       1              0x1             
  * 0x049B[7]     HOLDEXIT_STD_BO_PLLA        1              0x1             
- * 0x049D[5:0]   BW0_HO_PLLA                 16             0x10            
- * 0x049E[5:0]   BW1_HO_PLLA                 32             0x20            
- * 0x049F[5:0]   BW2_HO_PLLA                 13             0x0D            
- * 0x04A0[5:0]   BW3_HO_PLLA                 12             0x0C            
+ * 0x049D[5:0]   BW0_HO_PLLA                 15             0x0F            
+ * 0x049E[5:0]   BW1_HO_PLLA                 30             0x1E            
+ * 0x049F[5:0]   BW2_HO_PLLA                 14             0x0E            
+ * 0x04A0[5:0]   BW3_HO_PLLA                 13             0x0D            
  * 0x04A1[5:0]   BW4_HO_PLLA                 1              0x01            
  * 0x04A2[5:0]   BW5_HO_PLLA                 63             0x3F            
  * 0x04A6[2:0]   RAMP_STEP_SIZE_PLLA         3              0x3             
