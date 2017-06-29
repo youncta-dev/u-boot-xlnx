@@ -12,6 +12,7 @@
 #include <zynqpl.h>
 #include <asm/arch/hardware.h>
 #include <asm/arch/sys_proto.h>
+#include "board.h"
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -102,7 +103,14 @@ int board_late_init(void)
             samples_clk = 160;
     }
 
-    printf("samples_clk %d\n", samples_clk);
+    #ifdef SAMPLES_CLK_100
+    printf("samples_clk 100\n");
+    #endif
+
+    #ifdef SAMPLES_CLK_125
+    printf("samples_clk 125\n");
+    #endif
+
     si5347_configure(samples_clk);
 
 

@@ -3,6 +3,7 @@
 #include <spi.h>
 
 #include "spi-devices.h"
+#include "../board.h"
 #include "si5347_config.h"
 
 
