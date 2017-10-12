@@ -1,4 +1,15 @@
 
+if [ "$ARCH" == "" ]
+then
+    echo "No ARCH evn var defined, bailing out"
+    exit
+fi 
+
+if [ "$1" == "" ]
+then
+    echo "No board run provided: run2, run3, run4"
+    exit
+fi
 
 export PATH=$PATH:$PROJECT/linux-xlnx/build/scripts/dtc/
 
@@ -11,6 +22,30 @@ make ARCH=arm O=build CROSS_COMPILE=arm-xilinx-linux-gnueabi- env
 cp build/u-boot u-boot.elf
 
 
+
+cat > boot.bif << EOL
+the_ROM_image:
+{
+	[bootloader]../fpga_boot_$1/project_1.sdk/FSBL/Debug/FSBL.elf
+        ../fpga_boot_$1/project_1.runs/impl_1/design_1_wrapper.bit
+	u-boot.elf
+}
+
+EOL
+
+cat boot.bif
+
 bootgen -image boot.bif -w on -o i boot.bin 
+
+if [ "$2" == "jtag" ]
+then
+    mkdir -p $1
+    cp ../fpga_boot_$1/project_1.sdk/project_1_hw_platform_0/design_1_wrapper.bit $1/
+    cp ../fpga_boot_$1/project_1.sdk/project_1_hw_platform_0/ps7_init.tcl $1/
+    cp u-boot.elf $1/
+    cp boot.bin $1/
+    echo "Run $XMD to load your board using JTAG"
+fi
+
 
 
