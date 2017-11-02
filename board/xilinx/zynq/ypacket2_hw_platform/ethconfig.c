@@ -99,7 +99,7 @@ int eth_configure(void)
 
     devname = miiphy_get_current_dev();
 
-    *(fpga_reg_1) = 0x00000000;
+    *(fpga_reg_1) = 0x00000020;
     mdelay(500);
     *(fpga_reg_1) = 0x00000001;
     mdelay(500);
@@ -129,6 +129,8 @@ int eth_configure(void)
     mdelay(500);
     uint16_t pcs_status = *fpga_reg_2;
     printf("Status PCS %04x, link %d sync %d\n", pcs_status, pcs_status & 0x0001, (pcs_status & 0x0002) == 0x0002 );
+
+    
 
     return 0;
 }

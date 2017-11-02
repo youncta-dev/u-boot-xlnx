@@ -17,6 +17,7 @@
 #define CONFIG_SYS_NO_FLASH
 #define CONFIG_SPI_FLASH_STMICRO
 
+#define CONFIG_ZYNQ_USB
 #define CONFIG_ZYNQ_QSPI
 #define CONFIG_ZYNQ_SPI
 #define CONFIG_ENV_SPI_BUS	5
@@ -54,10 +55,11 @@
 #undef CONFIG_SERVERIP	
 
 #define CONFIG_IPADDR       172.30.0.252	
+#define CONFIG_NETMASK      255.255.255.0	
 #define CONFIG_SERVERIP	    172.30.0.250
 
 #undef CONFIG_BOOTDELAY
-#define CONFIG_BOOTDELAY    5
+#define CONFIG_BOOTDELAY    -1
 
 #undef  CONFIG_EXTRA_ENV_SETTINGS
 
@@ -103,6 +105,7 @@
 	"bank0args=setenv bootargs ${bootargs} ${debugflags} rootfstype=squashfs root=/dev/mtdblock4 ro\0" \
 	"bank1args=setenv bootargs ${bootargs} ${debugflags} rootfstype=squashfs root=/dev/mtdblock6 ro\0" \
 	"bootargs=console=ttyPS0,115200 earlyprintk \0" \
+	"ysplit=1\0" \
 	"qspibootbank0=echo Copying APS0 from QSPI flash to RAM... && " \
 		"sf probe 5:0 && " \
 		"sf read ${aps_ram_load_address} ${aps0_qspi_address} ${kernel_dtb_size} && aps ${aps_ram_load_address} && " \
