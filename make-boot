@@ -42,6 +42,7 @@ then
     mkdir -p $1
     cp ../fpga_boot_$1/project_1.sdk/project_1_hw_platform_0/design_1_wrapper.bit $1/
     cp ../fpga_boot_$1/project_1.sdk/project_1_hw_platform_0/ps7_init.tcl $1/
+    sed -i s/-force//g $1/ps7_init.tcl
     cp u-boot.elf $1/
     cp boot.bin $1/
     echo "Run $XMD to load your board using JTAG"
