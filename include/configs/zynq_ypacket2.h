@@ -98,6 +98,10 @@
     "bank=0\0" \
     "aps_ram_load_address=0x2000000\0" \
     "aps_size=0x6000000\0" \
+    "nowatchdog=0\0" \
+    "nocustomfpga=0\0" \
+    "noradio=0\0" \
+    "startcli=0\0" \
     "kernel_dtb_size=0x600000\0" \
     "aps0_qspi_address=0x1000000\0" \
     "kernel0_qspi_address=0x1010000\0" \
@@ -106,19 +110,31 @@
 	"bank1args=setenv bootargs ${bootargs} ${debugflags} rootfstype=squashfs root=/dev/mtdblock6 ro\0" \
 	"bootargs=console=ttyPS0,115200 earlyprintk \0" \
 	"ysplit=1\0" \
+	"checkqspibootbank0=sf probe 5:0 && sf read ${aps_ram_load_address} ${aps0_qspi_address} ${aps_size} && aps ${aps_ram_load_address} crc\0" \
 	"qspibootbank0=echo Copying APS0 from QSPI flash to RAM... && " \
 		"sf probe 5:0 && " \
-		"sf read ${aps_ram_load_address} ${aps0_qspi_address} ${kernel_dtb_size} && aps ${aps_ram_load_address} && " \
+		"if test -n $check_aps_crc; then " \
+            "sf read ${aps_ram_load_address} ${aps0_qspi_address} ${aps_size}; " \
+        "else " \
+            "sf read ${aps_ram_load_address} ${aps0_qspi_address} ${kernel_dtb_size}; " \
+        "fi && " \
+		"aps ${aps_ram_load_address} nocrc && " \
 		"run bank0args && " \
         "bootm ${aps_kernel_load_addr} - ${aps_dtb_load_addr}\0" \
+	"checkqspibootbank1=sf probe 5:0 && sf read ${aps_ram_load_address} ${aps1_qspi_address} ${aps_size} && aps ${aps_ram_load_address} crc\0" \
 	"qspibootbank1=echo Copying APS1 from QSPI flash to RAM... && " \
 		"sf probe 5:0 && " \
-		"sf read ${aps_ram_load_address} ${aps1_qspi_address} ${kernel_dtb_size} && aps ${aps_ram_load_address} && " \
+		"if test -n $check_aps_crc; then " \
+            "sf read ${aps_ram_load_address} ${aps1_qspi_address} ${aps_size}; " \
+        "else " \
+            "sf read ${aps_ram_load_address} ${aps1_qspi_address} ${kernel_dtb_size}; " \
+        "fi && " \
+		"aps ${aps_ram_load_address} nocrc&& " \
 		"run bank1args && " \
         "bootm ${aps_kernel_load_addr} - ${aps_dtb_load_addr}\0" \
 	"updateboot=echo Downloading new boot ... && " \
 		"sf probe 5:0 && " \
-		"tftpboot 0x100000 boot.bin && " \
+		"tftpboot 0x100000 boot${boardrun}.bin && " \
 		"sf erase 0x0 +${filesize} && " \
         "sf write ${fileaddr} 0x0 ${filesize}\0" \
 	"updateaps0=echo Downloading new aps ... && " \

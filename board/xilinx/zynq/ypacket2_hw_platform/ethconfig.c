@@ -127,7 +127,13 @@ int eth_configure(void)
     toggle_bit(fpga_reg_3, AN_RESTART);
 
     mdelay(500);
-    uint16_t pcs_status = *fpga_reg_2;
+    uint32_t pcs_status = *fpga_reg_2;
+
+    if ((pcs_status & 0xf0000000) == 0x30000000)
+        setenv("boardrun", "3");
+    else if ((pcs_status & 0xf0000000) == 0x40000000)
+        setenv("boardrun", "4");
+
     printf("Status PCS %04x, link %d sync %d\n", pcs_status, pcs_status & 0x0001, (pcs_status & 0x0002) == 0x0002 );
 
     
