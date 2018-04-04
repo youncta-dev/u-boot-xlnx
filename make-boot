@@ -27,7 +27,7 @@ cat > boot.bif << EOL
 the_ROM_image:
 {
 	[bootloader]../fpga_boot_${RUN}/project_1.sdk/FSBL/Debug/FSBL.elf
-        ../fpga_boot_${RUN}/project_1.runs/impl_1/design_1_wrapper.bit
+     ../fpga_boot_${RUN}/project_1.runs/impl_1/design_1_wrapper.bit
 	u-boot.elf
 }
 
@@ -47,7 +47,8 @@ then
     cp ../fpga_boot_${RUN}/project_1.sdk/project_1_hw_platform_0/ps7_init.tcl ${RUN}/
     sed -i s/-force//g ${RUN}/ps7_init.tcl
     cp u-boot.elf ${RUN}/
-    cp boot.bin ${RUN}/boot${RUN:3}.bin
+    cp boot.bin ${RUN}/
+
     echo "Run $XMD to load your board using JTAG"
 fi
 

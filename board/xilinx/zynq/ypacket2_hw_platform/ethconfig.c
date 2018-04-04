@@ -129,6 +129,8 @@ int eth_configure(void)
     mdelay(500);
     uint32_t pcs_status = *fpga_reg_2;
 
+    //setenv("bootdelay", "2");
+    
     if ((pcs_status & 0xf0000000) == 0x30000000)
         setenv("boardrun", "3");
     else if ((pcs_status & 0xf0000000) == 0x40000000)
