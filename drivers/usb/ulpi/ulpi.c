@@ -35,16 +35,20 @@ static int ulpi_integrity_check(struct ulpi_viewport *ulpi_vp)
 	int err, i;
 
 	/* Use the 'special' test value to check all bits */
-	for (i = 0; i < 2; i++, tval <<= 1) {
+	for (i = 0; i < 10000000; i++) {
 		err = ulpi_write(ulpi_vp, &ulpi->scratch, tval);
 		if (err)
 			return err;
 
 		val = ulpi_read(ulpi_vp, &ulpi->scratch);
+
+        if ((i % 100000) == 0)
+            printf(".");
 		if (val != tval) {
-			printf("ULPI integrity check failed\n");
+			printf("\nULPI integrity check failed at cycle %d, written %08x read %08x\n", i, tval, val);
 			return val;
 		}
+        tval = (~tval) & 0x000000ff;
 	}
 
 	return 0;
