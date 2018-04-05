@@ -375,7 +375,7 @@
 #if defined(CONFIG_CMD_ZYNQ_RSA)
 #define CONFIG_BOOTCOMMAND		"run rsa_$modeboot"
 #else
-#define CONFIG_BOOTCOMMAND		"sf probe 5:0; sf read 1000000 0 100; if itest.l *1000000 == eafffffe; then mw.l 43c1000c 00201010; run $modeboot; else run updateboot; reset; fi;"
+#define CONFIG_BOOTCOMMAND		"run $modeboot"
 #endif
 #define CONFIG_BOOTDELAY		-1 /* -1 to Disable autoboot */
 #define CONFIG_SYS_LOAD_ADDR		0 /* default? */

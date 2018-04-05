@@ -51,6 +51,9 @@
 
 #include <configs/zynq-common.h>
 
+#undef  CONFIG_BOOTCOMMAND
+#define CONFIG_BOOTCOMMAND		"sf probe 5:0; sf read 1000000 0 100; if itest.l *1000000 == eafffffe; then run checkaps0; else run updateboot; reset; fi;"
+
 #undef CONFIG_IPADDR	
 #undef CONFIG_SERVERIP	
 
@@ -137,6 +140,8 @@
 		"tftpboot 0x100000 boot${boardrun}.bin && " \
 		"sf erase 0x0 +${filesize} && " \
         "sf write ${fileaddr} 0x0 ${filesize}\0" \
+	"customboot=mw.l 43c1000c 00201010; run $modeboot;\0" \
+	"checkaps0=sf probe 5:0; sf read 1000000 ${aps0_qspi_address} 100; if itest.l *1000000 == 73190713; then run customboot; else run updateaps0; run customboot; fi;\0" \
 	"updateaps0=echo Downloading new aps ... && " \
 		"sf probe 5:0 && " \
 		"tftpboot 0x100000 aps.bin && " \
