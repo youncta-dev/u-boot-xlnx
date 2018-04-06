@@ -112,7 +112,7 @@
 	"bank0args=setenv bootargs ${bootargs} ${debugflags} rootfstype=squashfs root=/dev/mtdblock4 ro\0" \
 	"bank1args=setenv bootargs ${bootargs} ${debugflags} rootfstype=squashfs root=/dev/mtdblock6 ro\0" \
 	"bootargs=console=ttyPS0,115200 earlyprintk \0" \
-	"ysplit=1\0" \
+	"ysplit=0\0" \
 	"checkqspibootbank0=sf probe 5:0 && sf read ${aps_ram_load_address} ${aps0_qspi_address} ${aps_size} && aps ${aps_ram_load_address} crc\0" \
 	"qspibootbank0=echo Copying APS0 from QSPI flash to RAM... && " \
 		"sf probe 5:0 && " \
