@@ -8,6 +8,8 @@
  * SPDX-License-Identifier:	GPL-2.0+
  */
 
+
+
 #ifndef __CONFIG_ZYNQ_YPACKET2_H
 #define __CONFIG_ZYNQ_YPACKET2_H
 
@@ -18,7 +20,7 @@
 #define CONFIG_SPI_FLASH_STMICRO
 
 #define CONFIG_ZYNQ_USB
-#define CONFIG_ZYNQ_QSPI
+#define CONFIG_ZYNQ_QSPI    
 #define CONFIG_ZYNQ_SPI
 #define CONFIG_ENV_SPI_BUS	5
 #define CONFIG_ENV_OFFSET           0xf00000
@@ -82,6 +84,7 @@
 	"boot_size=0xF00000\0"	\
 	"fdt_high=0x20000000\0"	\
 	"initrd_high=0x20000000\0"	\
+	"pram=1024\0"	\
 	"bootenv=uEnv.txt\0" \
 	"loadbootenv=load mmc 0 ${loadbootenv_addr} ${bootenv}\0" \
 	"importbootenv=echo Importing environment from SD ...; " \
@@ -99,7 +102,8 @@
 		"sf read ${ramdisk_load_address} 0x620000 ${ramdisk_size} && " \
 		"bootm ${kernel_load_address} ${ramdisk_load_address} ${devicetree_load_address}\0" \
     "bank=0\0" \
-    "aps_ram_load_address=0x2000000\0" \
+    "aps_ram_load_address=0x3000000\0" \
+    "ddr_scratch_area=0x1000000\0" \
     "aps_size=0x6000000\0" \
     "nowatchdog=0\0" \
     "nocustomfpga=0\0" \
@@ -108,11 +112,12 @@
     "kernel_dtb_size=0x600000\0" \
     "aps0_qspi_address=0x1000000\0" \
     "kernel0_qspi_address=0x1010000\0" \
+    "dtb0_qspi_address=0x13b0000\0" \
     "aps1_qspi_address=0x7000000\0" \
 	"bank0args=setenv bootargs ${bootargs} ${debugflags} rootfstype=squashfs root=/dev/mtdblock4 ro\0" \
 	"bank1args=setenv bootargs ${bootargs} ${debugflags} rootfstype=squashfs root=/dev/mtdblock6 ro\0" \
 	"bootargs=console=ttyPS0,115200 earlyprintk \0" \
-	"ysplit=0\0" \
+	"awdt=mw.l f8000008 0000df0d; mw.l f800024c 00000001; mw.l f8000004 0000767b; mw.l f8f00628 00000009; mw.l f8f00620 00000010 \0" \
 	"checkqspibootbank0=sf probe 5:0 && sf read ${aps_ram_load_address} ${aps0_qspi_address} ${aps_size} && aps ${aps_ram_load_address} crc\0" \
 	"qspibootbank0=echo Copying APS0 from QSPI flash to RAM... && " \
 		"sf probe 5:0 && " \
@@ -137,26 +142,34 @@
         "bootm ${aps_kernel_load_addr} - ${aps_dtb_load_addr}\0" \
 	"updateboot=echo Downloading new boot ... && " \
 		"sf probe 5:0 && " \
-		"tftpboot 0x100000 boot${boardrun}.bin && " \
+		"tftpboot ${ddr_scratch_area} boot${boardrun}.bin && " \
 		"sf erase 0x0 +${filesize} && " \
         "sf write ${fileaddr} 0x0 ${filesize}\0" \
-	"customboot=mw.l 43c1000c 00201010; run $modeboot;\0" \
+	"customboot=sb 0x43c10004 6; run $modeboot;\0" \
 	"checkaps0=sf probe 5:0; sf read 1000000 ${aps0_qspi_address} 100; if itest.l *1000000 == 73190713; then run customboot; else run updateaps0; run customboot; fi;\0" \
 	"updateaps0=echo Downloading new aps ... && " \
 		"sf probe 5:0 && " \
-		"tftpboot 0x100000 aps.bin && " \
+		"tftpboot ${ddr_scratch_area} aps.bin && " \
 		"sf erase ${aps0_qspi_address} +${filesize} && " \
         "sf write ${fileaddr} ${aps0_qspi_address} ${filesize}\0" \
 	"updatekernel0=echo Downloading new kernel ... && " \
 		"sf probe 5:0 && " \
-		"tftpboot 0x100000 uImage && " \
+		"tftpboot ${ddr_scratch_area} uImage && " \
 		"sf erase ${kernel0_qspi_address} +${filesize} && " \
         "sf write ${fileaddr} ${kernel0_qspi_address} ${filesize}\0" \
+	"updatedtb0=echo Downloading new dtb ... && " \
+		"sf probe 5:0 && " \
+		"tftpboot ${ddr_scratch_area} uImage && " \
+		"sf erase ${dtb0_qspi_address} +${filesize} && " \
+        "sf write ${fileaddr} ${dtb0_qspi_address} ${filesize}\0" \
 	"updateaps1=echo Downloading new aps ... && " \
 		"sf probe 5:0 && " \
-		"tftpboot 0x100000 aps.bin && " \
+		"tftpboot ${ddr_scratch_area} aps.bin && " \
 		"sf erase ${aps1_qspi_address} +${filesize} && " \
         "sf write ${fileaddr} ${aps1_qspi_address} ${filesize}\0" \
+	"PARTNUMBER=part\0" \
+	"SERIALNUMBER=serial\0" \
+	"RADIOSTANDARD=1\0" \
 	"uenvboot=" \
 		"if run loadbootenv; then " \
 			"echo Loaded environment from ${bootenv}; " \

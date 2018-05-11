@@ -270,8 +270,8 @@
 	"devicetree_size=0x20000\0"	\
 	"ramdisk_size=0x5E0000\0"	\
 	"boot_size=0xF00000\0"	\
-	"fdt_high=0x20000000\0"	\
-	"initrd_high=0x20000000\0"	\
+	"fdt_high=0x1f000000\0"	\
+	"initrd_high=0x1f000000\0"	\
 	"bootenv=uEnv.txt\0" \
 	"loadbootenv=load mmc 0 ${loadbootenv_addr} ${bootenv}\0" \
 	"importbootenv=echo Importing environment from SD ...; " \
@@ -408,8 +408,7 @@
 #endif
 
 #define CONFIG_NR_DRAM_BANKS		1
-#define CONFIG_SYS_SDRAM_BASE		0
-
+#define CONFIG_SYS_SDRAM_BASE		0x1000000
 #define CONFIG_SYS_MEMTEST_START	CONFIG_SYS_SDRAM_BASE
 #define CONFIG_SYS_MEMTEST_END		(CONFIG_SYS_SDRAM_BASE + 0x1000)
 
