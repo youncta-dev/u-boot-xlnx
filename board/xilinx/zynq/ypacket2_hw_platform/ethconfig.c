@@ -3,13 +3,27 @@
 
 #include "ethconfig.h"
 
+#define FPGA_PROGRAMMED 0x00000004
+
 const char *miiphy_get_current_dev(void);
 
-void toggle_bit(volatile uint32_t* reg, uint32_t mask) 
+void _toggle_bit(volatile uint32_t* reg, uint32_t mask, int delay_ms) 
 {
     *reg = *reg | mask;
-    mdelay(100);
+    mdelay(delay_ms);
     *reg = *reg & ~mask;
+    mdelay(delay_ms);
+}
+
+void _set_bit(volatile uint32_t* reg, int bit) 
+{
+    *reg = *reg | (1 << bit);
+    mdelay(100);
+}
+
+void _clear_bit(volatile uint32_t* reg, int bit) 
+{
+    *reg = *reg & ~(1 << bit);
     mdelay(100);
 }
 
@@ -90,56 +104,87 @@ int eth_configure(void)
     int i = 0;
 	const char *devname;
 
+    volatile uint32_t* fpga_reg_1 = (uint32_t*) FPGA_CTRL_REG1; 
+    volatile uint32_t* fpga_reg_2 = (uint32_t*) FPGA_CTRL_REG2;
 
-    volatile uint32_t* fpga_reg_1 = (uint32_t*) 0x43c10004;
-    volatile uint32_t* fpga_reg_2 = (uint32_t*) 0x43c10008;
-    volatile uint32_t* fpga_reg_3 = (uint32_t*) 0x43c1000c;
+    uint32_t devcfg_int_sts =  *((uint32_t*) 0xf800700c);
+ 
 
-	net_loop(NONE);
+    if ((devcfg_int_sts & FPGA_PROGRAMMED) == 0)
+        return -1;
 
-    devname = miiphy_get_current_dev();
+    printf("FPGA is programmed %08x\n", *fpga_reg_1);
 
-    *(fpga_reg_1) = 0x00000020;
-    mdelay(500);
-    *(fpga_reg_1) = 0x00000001;
-    mdelay(500);
+    if ((*fpga_reg_1 & (1 << FPGA_CTRL_REG1_LINUX_SCRATCH_BIT)) == 0x00000000) 
+    {
+	    net_loop(NONE);
 
-    miiphy_read(devname, 0x1b, 0x00, &data);
-    printf("Global 1 reg 0 %04x\n", data);
+        devname = miiphy_get_current_dev();
 
-    // 1000 BASE-X 
-    miiphy_write(devname, 0x0a, 0x00, 0x0009);
-    mdelay(200);
-    miiphy_read(devname, 0x0a, 0x00, &data);
-
-    // leds
-    miiphy_write(devname, 0x00, 0x10, 0x8010);
-    miiphy_write(devname, 0x08, 0x10, 0x80e0);
-    printf("HW switch, port 0x0a reg 0 %04x link %d, \n", data, (data & 0x0800) == 0x0800);
+	    _set_bit(fpga_reg_1, FPGA_CTRL_REG1_ULPI_RESET_BIT);
+        mdelay(500);
+	    _clear_bit(fpga_reg_1, FPGA_CTRL_REG1_ULPI_RESET_BIT);
+        mdelay(50);
 
 
-    // autoneg enable
-    *fpga_reg_3 = 0x00a01000;    
+	    _set_bit(fpga_reg_1, FPGA_CTRL_REG1_RGMII_RESET_BIT);
+        mdelay(50);
+	    _set_bit(fpga_reg_1, FPGA_CTRL_REG1_MARVELL_RST_BIT);
+        mdelay(500);
+        _clear_bit(fpga_reg_1, FPGA_CTRL_REG1_MARVELL_RST_BIT);
+        mdelay(500);
+	    _clear_bit(fpga_reg_1, FPGA_CTRL_REG1_RGMII_RESET_BIT);
 
-    toggle_bit(fpga_reg_3, GIGE_RESET);
-    toggle_bit(fpga_reg_3, CONF_VALID);
-    toggle_bit(fpga_reg_3, AN_CONF_VALID);
-    toggle_bit(fpga_reg_3, AN_RESTART);
+        miiphy_read(devname, 0x1b, 0x00, &data);
+        printf("Global 1 reg 0 %04x\n", data);
 
-    mdelay(500);
-    uint32_t pcs_status = *fpga_reg_2;
 
-    setenv("bootdelay", "4");
+	    _set_bit(fpga_reg_1, FPGA_CTRL_REG1_SMI_SWITCH_BIT);
+        miiphy_write(devname, 0x12, 0x10, 0x0040);
+        mdelay(50);
+
+        // Select external switch mdio bus
+	    _clear_bit(fpga_reg_1, FPGA_CTRL_REG1_SMI_SWITCH_BIT);
+
+
+    #define RGMII_PORT  0
+        // Setup RGMII port
+        miiphy_write(devname, RGMII_PORT, 0x01, 0xc003);
+        miiphy_write(devname, RGMII_PORT, 0x00, 0xce07);
+        uint16_t val = 0;
+        miiphy_read(devname, RGMII_PORT, 0x00, &val);
+        printf("RGMII Reg 0 %04x \n", val);
+
+        // leds
+        //miiphy_write(devname, 0x00, 0x10, 0x8010);
+        //miiphy_write(devname, 0x08, 0x10, 0x80e0);
+
+	    _set_bit(fpga_reg_1, FPGA_CTRL_REG1_UBOOT_SCRATCH_BIT);
+
+        printf("FPGA CTRL REG 1 %08x \n", *fpga_reg_1);
+        printf("FPGA CTRL REG 2 %08x \n", *fpga_reg_2);
+        
+        if ((*fpga_reg_2 & 0xff000000) == 0x03000000)
+            setenv("boardrun", "3");
+        else if ((*fpga_reg_2 & 0xff000000) == 0x04000000)
+            setenv("boardrun", "4");
+
+        if (getenv("bootdelay") == NULL) {
+            setenv("bootdelay", "4");
+        }
+
+        if (getenv("ysplit") == NULL) {
+            setenv("ysplit", "0");
+            saveenv();
+        }
+        
+    }
+    else 
+    {
+        printf("FPGA is already configured\n");
+        //_set_bit(fpga_reg_1, FPGA_CTRL_REG1_RGMII_RESET_BIT);
+    }
     
-    if ((pcs_status & 0xf0000000) == 0x30000000)
-        setenv("boardrun", "3");
-    else if ((pcs_status & 0xf0000000) == 0x40000000)
-        setenv("boardrun", "4");
-
-    printf("Status PCS %04x, link %d sync %d\n", pcs_status, pcs_status & 0x0001, (pcs_status & 0x0002) == 0x0002 );
-
-    
-
     return 0;
 }
 
