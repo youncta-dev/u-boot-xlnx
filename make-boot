@@ -23,11 +23,17 @@ cp build/u-boot u-boot.elf
 
 RUN=$1
 
+BITSTREAM="../bootfpgaprj/boot_ysplit_${RUN}/vivado/FPGA_Prj_${RUN}/FPGA/FPGA.runs/impl_1/y2_top_wrapper.bit"
+
+
+FSBL="../fpgaprj/ProcessorBlock/ProcessorBlock.sdk/FSBL/Debug/FSBL.elf"
+
+
 cat > boot.bif << EOL
 the_ROM_image:
 {
-	[bootloader]../fpga_boot_${RUN}/project_1.sdk/FSBL/Debug/FSBL.elf
-     ../fpga_boot_${RUN}/project_1.runs/impl_1/design_1_wrapper.bit
+	[bootloader]$FSBL
+    $BITSTREAM
 	u-boot.elf
 }
 
@@ -42,9 +48,9 @@ bootgen -image boot.bif -w on -o i boot.bin
 if [ "$2" == "jtag" ]
 then
     mkdir -p ${RUN}
-    cp ../fpga_boot_${RUN}/project_1.sdk/FSBL/Debug/FSBL.elf ${RUN}/
-    cp ../fpga_boot_${RUN}/project_1.sdk/project_1_hw_platform_0/design_1_wrapper.bit ${RUN}/
-    cp ../fpga_boot_${RUN}/project_1.sdk/project_1_hw_platform_0/ps7_init.tcl ${RUN}/
+    cp $FSBL ${RUN}/
+    cp $BITSTREAM ${RUN}/
+    cp ../fpgaprj/ProcessorBlock/ProcessorBlock.sdk/FPGA_bd_wrapper_hw_platform_0/ps7_init.tcl ${RUN}/
     sed -i s/-force//g ${RUN}/ps7_init.tcl
     cp u-boot.elf ${RUN}/
     cp boot.bin ${RUN}/
@@ -53,4 +59,5 @@ then
 fi
 
 
+date
 

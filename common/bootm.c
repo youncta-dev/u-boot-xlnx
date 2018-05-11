@@ -286,7 +286,7 @@ static void print_decomp_msg(int comp_type, int type, bool is_xip)
 	if (comp_type == IH_COMP_NONE)
 		printf("   %s %s ... ", is_xip ? "XIP" : "Loading", name);
 	else
-		printf("   Uncompressing %s ... ", name);
+		printf("   uncompressing (%d) %s ... ", comp_type, name);
 }
 
 /**
@@ -333,6 +333,7 @@ int bootm_decomp_image(int comp, ulong load, ulong image_start, int type,
 
 	*load_end = load;
 	print_decomp_msg(comp, type, load == image_start);
+    printf("\nload %08x, imstart %08x imgbuf(from) %08x loadbuf(to) %08x\n", load, image_start, image_buf, load_buf);
 
 	/*
 	 * Load the image to the right place, decompressing if needed. After
