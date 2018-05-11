@@ -23,7 +23,7 @@ cp build/u-boot u-boot.elf
 
 RUN=$1
 
-BITSTREAM="../bootfpgaprj/boot_ysplit_${RUN}/vivado/FPGA_Prj_${RUN}/FPGA/FPGA.runs/impl_1/y2_top_wrapper.bit"
+BITSTREAM="../bootfpgaprj/boot_ysplit_ye_${RUN}/vivado/FPGA_Prj_${RUN}/FPGA/FPGA.runs/impl_1/y2_top_wrapper.bit"
 
 
 FSBL="../fpgaprj/ProcessorBlock/ProcessorBlock.sdk/FSBL/Debug/FSBL.elf"
