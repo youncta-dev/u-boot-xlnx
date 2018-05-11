@@ -226,6 +226,81 @@ static int do_mem_nm(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 	return mod_mem (cmdtp, 0, flag, argc, argv);
 }
 
+static int do_mem_scb(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
+{
+#ifdef CONFIG_SYS_SUPPORT_64BIT_DATA
+	u64 writeval;
+#else
+	ulong writeval;
+#endif
+	ulong	addr, count;
+	int	size;
+	void *buf, *start;
+	ulong bytes;
+    int bitnum;
+#define SET_BIT 0
+#define CLEAR_BIT 1
+
+    int op = SET_BIT; // Default set
+
+	if (argc != 3)
+		return CMD_RET_USAGE;
+
+	/* Check for size specification.
+	*/
+	if ((size = cmd_get_data_size(argv[0], 4)) < 1)
+		return 1;
+
+    
+    op = (argv[0][0] == 's')? SET_BIT:CLEAR_BIT;
+
+	/* Address is specified since argc > 1
+	*/
+	addr = simple_strtoul(argv[1], NULL, 16);
+	addr += base_address;
+
+	/* Get the value to write.
+	*/
+
+	bitnum = simple_strtoul(argv[2], NULL, 16);
+
+
+	start = map_sysmem(addr, size);
+	buf = start;
+
+	if (size == 4) {
+        if (op == SET_BIT)
+		    *((u32 *)buf) = *((u32*)buf) | (1 << bitnum);
+        else
+            *((u32 *)buf) = *((u32*)buf) & ~(1 << bitnum);
+    }
+#ifdef CONFIG_SYS_SUPPORT_64BIT_DATA
+	else if (size == 8) {
+        if (op == SET_BIT)
+		    *((u64 *)buf) = *((u64*)buf) | (1 << bitnum);
+        else
+		    *((u64 *)buf) = *((u64*)buf) & ~(1 << bitnum);
+    }
+#endif
+	else if (size == 2) {
+        if (op == SET_BIT)
+		    *((u16 *)buf) = *((u16*)buf) | (1 << bitnum);
+        else
+            *((u16 *)buf) = *((u16*)buf) & ~(1 << bitnum);
+    }
+	else {
+        if (op == SET_BIT)
+		    *((u8 *)buf) = *((u8*)buf) | (1 << bitnum);
+        else
+            *((u8 *)buf) = *((u8*)buf) & ~(1 << bitnum);
+    }
+
+	
+	unmap_sysmem(start);
+	return 0;
+}
+
+
 static int do_mem_mw(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
 #ifdef CONFIG_SYS_SUPPORT_64BIT_DATA
@@ -285,6 +360,7 @@ static int do_mem_mw(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 	unmap_sysmem(start);
 	return 0;
 }
+
 
 #ifdef CONFIG_MX_CYCLIC
 static int do_mem_mdc(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
@@ -1442,6 +1518,20 @@ U_BOOT_CMD(
 );
 
 U_BOOT_CMD(
+	sb,	3,	0,	do_mem_scb,
+	"set bit ",
+	"[.b, .w, .l] address bitnum"
+);
+
+U_BOOT_CMD(
+	cb,	3,	0,	do_mem_scb,
+	"set bit ",
+	"[.b, .w, .l] address bitnum"
+
+);
+
+
+U_BOOT_CMD(
 	cp,	4,	1,	do_mem_cp,
 	"memory copy",
 #ifdef CONFIG_SYS_SUPPORT_64BIT_DATA
@@ -1562,6 +1652,7 @@ U_BOOT_CMD(
 	"[.b, .w, .l] address value delay(ms)"
 #endif
 );
+
 #endif /* CONFIG_MX_CYCLIC */
 
 #ifdef CONFIG_CMD_MEMINFO
@@ -1570,4 +1661,5 @@ U_BOOT_CMD(
 	"display memory information",
 	""
 );
+
 #endif
