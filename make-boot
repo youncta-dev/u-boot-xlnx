@@ -26,7 +26,7 @@ RUN=$1
 BITSTREAM="../bootfpgaprj/boot_ysplit_ye_${RUN}/vivado/FPGA_Prj_${RUN}/FPGA/FPGA.runs/impl_1/y2_top_wrapper.bit"
 
 
-FSBL="../fpgaprj/ProcessorBlock/ProcessorBlock.sdk/FSBL/Debug/FSBL.elf"
+FSBL="../fpgaprj/ProcessorBlock_${RUN}/ProcessorBlock.sdk/FSBL/Debug/FSBL.elf"
 
 
 cat > boot.bif << EOL
@@ -50,7 +50,7 @@ then
     mkdir -p ${RUN}
     cp $FSBL ${RUN}/
     cp $BITSTREAM ${RUN}/
-    cp ../fpgaprj/ProcessorBlock/ProcessorBlock.sdk/FPGA_bd_wrapper_hw_platform_0/ps7_init.tcl ${RUN}/
+    cp ../fpgaprj/ProcessorBlock_${RUN}/ProcessorBlock.sdk/FPGA_bd_wrapper_hw_platform_0/ps7_init.tcl ${RUN}/
     sed -i s/-force//g ${RUN}/ps7_init.tcl
     cp u-boot.elf ${RUN}/
     cp boot.bin ${RUN}/
