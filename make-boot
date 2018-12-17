@@ -50,10 +50,12 @@ then
     mkdir -p ${RUN}
     cp $FSBL ${RUN}/
     cp $BITSTREAM ${RUN}/
+    cp $BITSTREAM ${RUN}/design_1_wrapper.bit
     cp ../fpgaprj/ProcessorBlock_${RUN}/ProcessorBlock.sdk/FPGA_bd_wrapper_hw_platform_0/ps7_init.tcl ${RUN}/
     sed -i s/-force//g ${RUN}/ps7_init.tcl
     cp u-boot.elf ${RUN}/
     cp boot.bin ${RUN}/
+
 
     echo "Run $XMD to load your board using JTAG"
 fi

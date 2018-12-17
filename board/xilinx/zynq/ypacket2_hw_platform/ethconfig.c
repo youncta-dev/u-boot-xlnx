@@ -150,7 +150,8 @@ int eth_configure(void)
     #define RGMII_PORT  0
         // Setup RGMII port
         miiphy_write(devname, RGMII_PORT, 0x01, 0xc003);
-        miiphy_write(devname, RGMII_PORT, 0x00, 0xce07);
+        miiphy_write(devname, RGMII_PORT, 0x00, 0xce07);    
+        miiphy_write(devname, RGMII_PORT, 0x04, 0x0073);
         uint16_t val = 0;
         miiphy_read(devname, RGMII_PORT, 0x00, &val);
         printf("RGMII Reg 0 %04x \n", val);

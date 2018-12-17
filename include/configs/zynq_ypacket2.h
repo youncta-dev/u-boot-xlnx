@@ -145,7 +145,7 @@
 		"tftpboot ${ddr_scratch_area} boot${boardrun}.bin && " \
 		"sf erase 0x0 +${filesize} && " \
         "sf write ${fileaddr} 0x0 ${filesize}\0" \
-	"customboot=sb 0x43c10004 6; run $modeboot;\0" \
+	"customboot=mii write 0x00 0x04 0x007c; mii write 0x0a 0x00 0x007c; run $modeboot;\0" \
 	"checkaps0=sf probe 5:0; sf read 1000000 ${aps0_qspi_address} 100; if itest.l *1000000 == 73190713; then run customboot; else run updateaps0; run customboot; fi;\0" \
 	"updateaps0=echo Downloading new aps ... && " \
 		"sf probe 5:0 && " \
